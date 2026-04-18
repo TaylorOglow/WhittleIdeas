@@ -32,7 +32,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); font
 @keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
 nav { position: sticky; top: 0; z-index: 100; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 5vw; display: flex; align-items: center; justify-content: space-between; height: 60px; }
-.nav-logo { font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--text); cursor: pointer; user-select: none; }
+.nav-logo { font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--text); cursor: pointer; user-select: none; display: flex; align-items: center; }
+.logo-img { height: 36px; width: auto; display: block; }
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a { font-family: var(--sans); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; cursor: pointer; transition: color 0.2s; }
 .nav-links a:hover, .nav-links a.active { color: var(--text); }
@@ -331,7 +332,11 @@ footer p { font-size: 0.8rem; color: var(--faint); }
     <div class="tracker-card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
         <p class="section-label">Daily Practice Tracker</p>
-        <button class="med-undo" id="med-undo-btn" onclick="undoMeditation()">↩ Undo today</button>
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <button class="med-undo" id="med-undo-btn" onclick="undoMeditation()">↩ Undo today</button>
+          <button class="med-undo" style="display:inline;" onclick="exportMedData()" title="Download a backup of all your meditation data">↓ Export</button>
+          <label class="med-undo" style="display:inline;cursor:pointer;" title="Restore from a previously exported backup">↑ Import<input type="file" accept=".json" onchange="importMedData(event)" style="display:none;"></label>
+        </div>
       </div>
 
       <div class="min-label">Session duration</div>
@@ -754,6 +759,55 @@ function undoMeditation() {
   showToast('Today\'s session removed.');
 }
 
+function exportMedData() {
+  const s = loadMed();
+  const filename = 'whittle-meditation-backup-' + todayStr() + '.json';
+  const blob = new Blob([JSON.stringify(s, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+  showToast('Backup downloaded: ' + filename);
+}
+
+function importMedData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      // Validate it looks like meditation data
+      if (!Array.isArray(parsed.history) || typeof parsed.total !== 'number') {
+        showToast('Invalid backup file — import cancelled.'); return;
+      }
+      const existing = loadMed();
+      // Merge: combine histories, deduplicate by date, keep highest minutes per date
+      const mergedMap = {};
+      [...existing.history, ...parsed.history].forEach(h => {
+        const date = h.date || h;
+        const mins = h.minutes || 0;
+        if (!mergedMap[date] || mins > (mergedMap[date].minutes || 0)) {
+          mergedMap[date] = { date, minutes: mins };
+        }
+      });
+      const merged = defMed();
+      merged.history = Object.values(mergedMap).sort((a, b) => a.date.localeCompare(b.date));
+      merged.total = merged.history.length;
+      merged.totalMinutes = merged.history.reduce((t, h) => t + (h.minutes || 0), 0);
+      recalcStreak(merged);
+      merged.best = Math.max(existing.best || 0, parsed.best || 0, merged.streak);
+      saveMed(merged);
+      renderMed();
+      showToast('Imported & merged — ' + merged.total + ' sessions total.');
+    } catch {
+      showToast('Could not read file. Is it a valid meditation backup?');
+    }
+    event.target.value = ''; // reset so same file can be re-imported
+  };
+  reader.readAsText(file);
+}
+
 let currentZoom = '28';
 
 function setCalZoom(zoom) {
@@ -1144,16 +1198,6 @@ document.addEventListener('keydown', e => {
 // ══════════════════════════════════════════
 //  STRONG APP — CSV IMPORT
 // ══════════════════════════════════════════
-/*
- * HOW TO EXPORT FROM STRONG:
- * 1. Open Strong app → tap your profile icon
- * 2. Go to Settings → Export Data
- * 3. Tap "Export Workout Data (CSV)"
- * 4. Share / save the CSV file, then drop it here
- *
- * Strong CSV format:
- * Date,Workout Name,Duration,Exercise Name,Set Order,Weight,Reps,Distance,Seconds,Notes,Workout Notes,RPE
- */
 const STRONG_KEY = 'whittle_strong_v1';
 
 function loadStrongData() {
@@ -1196,13 +1240,11 @@ function handleStrongFile(event) {
 })();
 
 function parseStrongCSV(text) {
-  // Handle BOM
   if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
 
   const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
   if (!lines.length) { showToast('CSV appears to be empty.'); return; }
 
-  // Parse header
   const header = parseCSVLine(lines[0]).map(h => h.trim().toLowerCase());
   const col = name => header.indexOf(name);
 
@@ -1215,16 +1257,14 @@ function parseStrongCSV(text) {
     return;
   }
 
-  // Group rows into workouts by (date, workout name)
-  const workoutMap = {}; // key → { date, name, duration, exercises: { name → sets[] } }
-  const exerciseCounts = {}; // exercise name → total sets
+  const workoutMap = {};
+  const exerciseCounts = {};
 
   for (let i = 1; i < lines.length; i++) {
     const cols = parseCSVLine(lines[i]);
     if (!cols.length) continue;
 
     const rawDate = cols[iDate] || '';
-    // Strong dates can be "2024-03-15 07:30:00" or "2024-03-15"
     const date = rawDate.slice(0, 10);
     const workout = cols[iWorkout] || 'Workout';
     const key = date + '|' + workout;
@@ -1245,14 +1285,12 @@ function parseStrongCSV(text) {
 
   const workouts = Object.values(workoutMap).sort((a, b) => b.date.localeCompare(a.date));
 
-  // Compute stats
-  let totalVolume = 0; // kg
+  let totalVolume = 0;
   let totalDurationMins = 0;
   let parsedDurations = 0;
 
   workouts.forEach(w => {
     w.sets.forEach(s => { totalVolume += s.weight * s.reps; });
-    // Duration strings: "1h 23m" or "45m" or "1:23:00"
     const dur = parseDurationToMins(w.durationStr);
     if (dur > 0) { totalDurationMins += dur; parsedDurations++; }
   });
@@ -1273,14 +1311,12 @@ function parseStrongCSV(text) {
 
 function parseDurationToMins(str) {
   if (!str) return 0;
-  // "1h 23m" format
   const hm = str.match(/(\d+)h\s*(\d+)m/);
   if (hm) return parseInt(hm[1]) * 60 + parseInt(hm[2]);
   const h = str.match(/(\d+)h/);
   if (h) return parseInt(h[1]) * 60;
   const m = str.match(/(\d+)m/);
   if (m) return parseInt(m[1]);
-  // "1:23:00" format
   const colon = str.match(/^(\d+):(\d+):(\d+)$/);
   if (colon) return parseInt(colon[1]) * 60 + parseInt(colon[2]);
   const colon2 = str.match(/^(\d+):(\d+)$/);
@@ -1320,7 +1356,6 @@ function renderStrongData(data) {
     document.getElementById('strong-volume-unit').textContent = 'kg lifted';
   }
 
-  // Recent workouts list
   const list = document.getElementById('strong-workouts-list');
   list.innerHTML = '';
   data.workouts.slice(0, 5).forEach(w => {
@@ -1343,7 +1378,6 @@ function renderStrongData(data) {
     list.appendChild(row);
   });
 
-  // Top exercises bar chart
   const exList = document.getElementById('strong-exercises-list');
   exList.innerHTML = '';
   const maxCount = data.topExercises[0]?.[1] || 1;
