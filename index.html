@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Personal Blog</title>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Whittle Ideas</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -25,269 +25,251 @@
 }
 
 html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
-  font-size: 16px;
-  line-height: 1.7;
-}
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.7; }
 
 .page { display: none; }
-.page.active { display: block; animation: fadeIn 0.3s ease both; }
+.page.active { display: block; animation: fadeIn 0.35s ease both; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* NAV */
-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-  padding: 0 5vw;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 60px;
-}
-
-.nav-logo {
-  font-family: var(--serif); font-size: 1rem; font-style: italic;
-  color: var(--text); cursor: pointer;
-}
-
+nav { position: sticky; top: 0; z-index: 100; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 5vw; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.nav-logo { font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--text); cursor: pointer; user-select: none; }
 .nav-links { display: flex; gap: 2rem; list-style: none; }
-
-.nav-links a {
-  font-family: var(--sans); font-size: 0.78rem; font-weight: 500;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--muted); text-decoration: none; cursor: pointer;
-  transition: color 0.2s;
-}
+.nav-links a { font-family: var(--sans); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; cursor: pointer; transition: color 0.2s; }
 .nav-links a:hover, .nav-links a.active { color: var(--text); }
 
-/* HERO */
-.home-hero {
-  padding: 6rem 5vw 5rem; max-width: 860px;
-}
-.home-hero h1 {
-  font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.6rem);
-  font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.5rem;
-}
+.home-hero { padding: 6rem 5vw 5rem; max-width: 860px; }
+.home-hero h1 { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.5rem; }
 .home-hero h1 em { font-style: italic; color: var(--muted); }
-.home-hero p {
-  font-size: 1.05rem; font-weight: 300; color: var(--muted);
-  max-width: 52ch; line-height: 1.85;
-}
-
+.home-hero p { font-size: 1.05rem; font-weight: 300; color: var(--muted); max-width: 52ch; line-height: 1.85; }
 .divider { border: none; border-top: 1px solid var(--border); margin: 0 5vw; }
-
-/* ABOUT */
-.about-section {
-  padding: 5rem 5vw;
-  display: grid; grid-template-columns: 180px 1fr; gap: 5rem;
-  max-width: 1100px;
-}
-.section-label {
-  font-family: var(--sans); font-size: 0.7rem; font-weight: 500;
-  letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint);
-  margin-bottom: 1rem;
-}
-.about-section h2 {
-  font-family: var(--serif); font-size: 1.4rem; font-weight: 400;
-  line-height: 1.3; margin-bottom: 1.2rem;
-}
-.about-section p {
-  font-size: 0.97rem; font-weight: 300; color: var(--muted);
-  line-height: 1.85; margin-bottom: 0.9rem;
-}
-
-/* TOPICS */
-.topics-section {
-  padding: 5rem 5vw;
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-.topics-section > .section-label { margin-bottom: 2.5rem; }
-
-.topics-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1px; background: var(--border);
-}
-
-.topic-tile {
-  background: var(--bg2); padding: 2.5rem 2rem;
-  cursor: pointer; transition: background 0.2s;
-  border: none; text-align: left; width: 100%;
-}
+.topics-section { padding: 5rem 5vw; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.topics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
+.topic-tile { background: var(--bg2); padding: 2.5rem 2rem; border: none; text-align: left; width: 100%; cursor: pointer; transition: background 0.2s; }
 .topic-tile:hover { background: var(--bg); }
-
 .tile-accent { width: 28px; height: 3px; border-radius: 2px; margin-bottom: 1.5rem; }
+.topic-tile h3 { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; margin-bottom: 0.7rem; }
+.topic-tile p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+.tile-cta { display: inline-block; margin-top: 1.5rem; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; color: var(--faint); }
 
-.topic-tile h3 {
-  font-family: var(--serif); font-size: 1.2rem; font-weight: 400;
-  line-height: 1.2; margin-bottom: 0.7rem;
-}
-.topic-tile p {
-  font-size: 0.85rem; font-weight: 300; color: var(--muted); line-height: 1.65;
-}
-.tile-cta {
-  display: inline-block; margin-top: 1.5rem;
-  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--faint); transition: color 0.2s;
-}
-.topic-tile:hover .tile-cta { color: var(--text); }
-
-/* POSTS */
-.posts-section { padding: 5rem 5vw; max-width: 1100px; }
-.posts-section > .section-label { margin-bottom: 2.5rem; }
-
-.post-row {
-  display: grid; grid-template-columns: 140px 1fr 90px;
-  gap: 2.5rem; align-items: start;
-  padding: 2rem 0; border-bottom: 1px solid var(--border);
-  cursor: pointer; text-decoration: none; color: inherit;
-}
-.post-row:first-of-type { border-top: 1px solid var(--border); }
-.post-row:hover .post-row-title { color: var(--muted); }
-
-.post-row-meta { font-size: 0.78rem; font-weight: 300; color: var(--faint); padding-top: 3px; }
-
-.post-tag {
-  display: inline-block; font-size: 0.67rem; font-weight: 500;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 2px 8px; border-radius: 2px; margin-bottom: 0.6rem;
-}
-.tag-ir    { background: #e8eef5; color: var(--accent-ir); }
-.tag-fit   { background: #f5ebe8; color: var(--accent-fit); }
-.tag-med   { background: #e8f0ec; color: var(--accent-med); }
-.tag-wood  { background: #f2ece3; color: var(--accent-wood); }
-
-.post-row-title {
-  font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
-  line-height: 1.35; margin-bottom: 0.4rem; transition: color 0.2s;
-}
-.post-row-excerpt { font-size: 0.875rem; font-weight: 300; color: var(--muted); line-height: 1.7; }
-.post-row-cta {
-  font-size: 0.73rem; font-weight: 500; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--faint); text-align: right;
-  padding-top: 4px; transition: color 0.2s;
-}
-.post-row:hover .post-row-cta { color: var(--text); }
-
-/* RECOMMENDATIONS */
-.recs-section {
-  padding: 5rem 5vw;
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-}
-.recs-section > .section-label { margin-bottom: 2rem; }
-
-.recs-tabs {
-  display: flex; border-bottom: 1px solid var(--border); margin-bottom: 3rem;
-}
-.rec-tab {
-  font-family: var(--sans); font-size: 0.78rem; font-weight: 500;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 0.65rem 1.4rem; border: none; background: none;
-  color: var(--faint); cursor: pointer;
-  border-bottom: 2px solid transparent; margin-bottom: -1px;
-  transition: color 0.2s;
-}
-.rec-tab.active { color: var(--text); border-bottom-color: var(--text); }
-.rec-tab:hover { color: var(--text); }
-
-.rec-panel { display: none; }
-.rec-panel.active { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-
-.rec-card {
-  background: var(--bg); border: 1px solid var(--border);
-  padding: 1.75rem; border-radius: 2px;
-}
-.rec-topic {
-  font-size: 0.67rem; font-weight: 500; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--faint); margin-bottom: 0.7rem;
-}
-.rec-card h4 {
-  font-family: var(--serif); font-size: 1rem; font-weight: 400;
-  line-height: 1.35; margin-bottom: 0.35rem;
-}
-.rec-card .rec-author {
-  font-size: 0.82rem; font-weight: 300; color: var(--muted);
-  font-style: italic; margin-bottom: 0.75rem;
-}
-.rec-card p { font-size: 0.83rem; font-weight: 300; color: var(--muted); line-height: 1.65; }
-
-/* TOPIC PAGES */
-.topic-page-header {
-  padding: 5rem 5vw 4rem; border-bottom: 1px solid var(--border); max-width: 860px;
-}
-.back-btn {
-  font-family: var(--sans); font-size: 0.75rem; font-weight: 500;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--faint); cursor: pointer; border: none; background: none;
-  padding: 0; margin-bottom: 2.5rem; display: inline-block;
-  transition: color 0.2s;
-}
-.back-btn:hover { color: var(--text); }
-
+.topic-page-header { padding: 5rem 5vw 4rem; border-bottom: 1px solid var(--border); max-width: 860px; }
+.back-btn { font-family: var(--sans); font-size: 0.75rem; font-weight: 500; color: var(--faint); cursor: pointer; border: none; background: none; margin-bottom: 2.5rem; display: block; padding: 0; transition: color 0.2s; }
+.back-btn:hover { color: var(--muted); }
 .tp-accent { width: 32px; height: 3px; border-radius: 2px; margin-bottom: 1.5rem; }
-
-.topic-page-header h1 {
-  font-family: var(--serif); font-size: clamp(2rem, 4vw, 2.8rem);
-  font-weight: 400; line-height: 1.15; margin-bottom: 1rem;
-}
-.topic-page-header p {
-  font-size: 1rem; font-weight: 300; color: var(--muted);
-  max-width: 50ch; line-height: 1.85;
-}
-
+.topic-page-header h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; margin-bottom: 0.8rem; }
+.topic-page-header p { font-size: 0.97rem; color: var(--muted); font-weight: 300; }
 .topic-posts { padding: 4rem 5vw; max-width: 860px; }
+.section-label { font-family: var(--sans); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); }
+.tracker-card { background: var(--bg2); border: 1px solid var(--border); padding: 2rem; margin-bottom: 3rem; border-radius: 2px; }
 
-.tp-post {
-  padding: 2.2rem 0; border-bottom: 1px solid var(--border); cursor: default;
-}
-.tp-post:first-child { border-top: 1px solid var(--border); }
+.tp-post { padding: 2.2rem 0; border-bottom: 1px solid var(--border); }
+.tp-post-cat { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--faint); margin-bottom: 0.6rem; }
+.tp-post-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; margin-bottom: 0.6rem; cursor: pointer; }
+.tp-post-title:hover { text-decoration: underline; text-decoration-color: var(--border); }
+.tp-post-excerpt { font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.75; max-width: 60ch; }
+.tp-post-meta { font-size: 0.72rem; color: var(--faint); margin-top: 0.8rem; }
 
-.tp-post-date { font-size: 0.78rem; font-weight: 300; color: var(--faint); margin-bottom: 0.5rem; }
-.tp-post-title {
-  font-family: var(--serif); font-size: 1.35rem; font-weight: 400;
-  line-height: 1.3; margin-bottom: 0.5rem;
-}
-.tp-post-excerpt { font-size: 0.9rem; font-weight: 300; color: var(--muted); line-height: 1.75; max-width: 60ch; }
+footer { padding: 2.5rem 5vw; border-top: 1px solid var(--border); background: var(--bg2); display: flex; justify-content: space-between; align-items: center; }
+footer p { font-size: 0.8rem; color: var(--faint); }
 
-/* FOOTER */
-footer {
-  padding: 2.5rem 5vw;
-  border-top: 1px solid var(--border);
-  background: var(--bg2);
-  display: flex; justify-content: space-between; align-items: center;
-}
-footer p { font-size: 0.8rem; font-weight: 300; color: var(--faint); }
+.toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--text); color: var(--bg2); padding: 0.75rem 1.5rem; border-radius: 2px; font-size: 0.82rem; font-family: var(--sans); opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none; z-index: 999; white-space: nowrap; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .about-section { grid-template-columns: 1fr; gap: 2rem; }
+/* ── MEDITATION ── */
+.med-check-area { display: flex; align-items: center; gap: 1rem; background: var(--bg); border: 1px solid var(--border); padding: 1.2rem 1.5rem; border-radius: 2px; cursor: pointer; transition: background 0.2s; margin-bottom: 1rem; user-select: none; }
+.med-check-area:hover { background: var(--surface); }
+.med-check-area.checked { background: #eef4f1; border-color: #a4c4b7; }
+.med-check-box { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 3px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
+.med-check-area.checked .med-check-box { background: var(--accent-med); border-color: var(--accent-med); }
+.med-check-box svg { opacity: 0; transition: opacity 0.15s; }
+.med-check-area.checked .med-check-box svg { opacity: 1; }
+.med-check-label { font-family: var(--serif); font-size: 1rem; }
+.med-check-sub { font-size: 0.78rem; color: var(--faint); margin-top: 0.1rem; }
+
+.min-label { font-size: 0.72rem; color: var(--faint); margin-bottom: 0.6rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; }
+.min-selector { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.min-btn { font-family: var(--sans); font-size: 0.78rem; font-weight: 500; padding: 0.4rem 0.9rem; border: 1px solid var(--border); background: var(--bg2); color: var(--muted); cursor: pointer; border-radius: 2px; transition: all 0.15s; }
+.min-btn:hover { border-color: var(--accent-med); color: var(--accent-med); }
+.min-btn.selected { background: var(--accent-med); border-color: var(--accent-med); color: white; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 1.5rem; }
+.stat-box { padding: 1.2rem 1.5rem; background: var(--bg2); border-right: 1px solid var(--border); }
+.stat-box:last-child { border-right: none; }
+.stat-box .s-label { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--faint); margin-bottom: 0.3rem; }
+.stat-box .s-value { font-size: 1.8rem; font-family: var(--serif); color: var(--text); line-height: 1; }
+.stat-box .s-unit { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+.cal-controls { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.cal-label { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--faint); }
+.cal-zoom-btns { display: flex; gap: 0.3rem; }
+.cal-zoom-btn { font-size: 0.68rem; font-weight: 500; padding: 0.25rem 0.65rem; border: 1px solid var(--border); background: var(--bg2); color: var(--faint); cursor: pointer; border-radius: 2px; transition: all 0.15s; font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.06em; }
+.cal-zoom-btn.active { background: var(--text); color: var(--bg2); border-color: var(--text); }
+
+/* GitHub-style heatmap */
+.cal-heatmap-outer { overflow-x: auto; padding-bottom: 6px; }
+.cal-heatmap { display: flex; gap: 0; align-items: flex-start; }
+.cal-day-labels { display: flex; flex-direction: column; gap: 0; margin-right: 6px; padding-top: 18px; /* offset for month labels */ flex-shrink: 0; }
+.cal-day-label { font-size: 0.58rem; color: var(--faint); font-weight: 500; font-family: var(--sans); line-height: 1; height: 11px; display: flex; align-items: center; margin-bottom: 2px; width: 14px; }
+.cal-day-label.hidden { visibility: hidden; }
+.cal-columns-wrap { display: flex; flex-direction: column; }
+.cal-month-labels { display: flex; margin-bottom: 4px; height: 14px; }
+.cal-month-label { font-size: 0.6rem; color: var(--faint); font-family: var(--sans); font-weight: 500; white-space: nowrap; }
+.cal-columns { display: flex; gap: 2px; }
+.cal-column { display: flex; flex-direction: column; gap: 2px; }
+.cal-cell { width: 11px; height: 11px; border-radius: 2px; background: var(--surface); transition: background 0.15s; cursor: default; flex-shrink: 0; position: relative; }
+.cal-cell.done-1 { background: #b7d5c8; }
+.cal-cell.done-2 { background: #7ab89e; }
+.cal-cell.done-3 { background: #4d9b78; }
+.cal-cell.done-4 { background: var(--accent-med); }
+.cal-cell.today { outline: 2px solid var(--accent-med); outline-offset: 1px; }
+.cal-cell.empty { background: transparent; cursor: default; }
+
+/* Tooltip */
+.cal-tooltip { position: fixed; background: var(--text); color: var(--bg2); font-size: 0.72rem; font-family: var(--sans); padding: 0.35rem 0.65rem; border-radius: 3px; pointer-events: none; z-index: 200; white-space: nowrap; opacity: 0; transition: opacity 0.1s; }
+.cal-tooltip.visible { opacity: 1; }
+
+.med-undo { font-size: 0.72rem; color: var(--faint); background: none; border: none; cursor: pointer; padding: 0; font-family: var(--sans); transition: color 0.2s; display: none; }
+.med-undo:hover { color: var(--muted); }
+.med-undo.visible { display: inline; }
+
+/* ── STRAVA ── */
+.strava-connect-area { text-align: center; padding: 2rem 0; }
+.btn-strava { display: inline-flex; align-items: center; gap: 0.6rem; background: #FC6100; color: white; border: none; padding: 0.9rem 1.8rem; font-family: var(--sans); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; border-radius: 2px; transition: opacity 0.2s; }
+.btn-strava:hover { opacity: 0.88; }
+.strava-note { font-size: 0.8rem; color: var(--faint); margin-top: 1rem; }
+.strava-connected { display: none; }
+.strava-connected.visible { display: block; }
+.strava-unlinked.hidden { display: none; }
+.athlete-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+.athlete-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent-fit); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1rem; overflow: hidden; flex-shrink: 0; }
+.athlete-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.athlete-name { font-family: var(--serif); font-size: 1rem; }
+.athlete-meta { font-size: 0.78rem; color: var(--faint); }
+.strava-badge { margin-left: auto; display: flex; align-items: center; gap: 0.4rem; font-size: 0.68rem; font-weight: 600; color: #FC6100; text-transform: uppercase; letter-spacing: 0.08em; }
+.fitness-summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 1.5rem; }
+.fitness-summary-grid .stat-box { border-right: 1px solid var(--border); }
+.fitness-summary-grid .stat-box:last-child { border-right: none; }
+.activities-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+.activity-row { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; background: var(--bg); border-radius: 2px; border: 1px solid var(--border); }
+.act-icon { font-size: 1.2rem; width: 28px; text-align: center; }
+.act-info { flex: 1; }
+.act-name { font-size: 0.92rem; font-family: var(--serif); }
+.act-date { font-size: 0.75rem; color: var(--faint); }
+.act-stats { display: flex; gap: 1.2rem; text-align: right; }
+.act-stat-val { font-size: 0.9rem; font-family: var(--serif); }
+.act-stat-lbl { font-size: 0.65rem; color: var(--faint); text-transform: uppercase; letter-spacing: 0.08em; }
+.strava-disconnect { font-size: 0.72rem; color: var(--faint); background: none; border: none; cursor: pointer; padding: 0; font-family: var(--sans); transition: color 0.2s; margin-top: 1rem; display: block; }
+.strava-disconnect:hover { color: var(--muted); }
+.strava-error { background: #fef2f0; border: 1px solid #f5c6bb; padding: 1rem 1.2rem; border-radius: 2px; font-size: 0.85rem; color: #7a3d2e; margin-bottom: 1rem; display: none; }
+.strava-error.visible { display: block; }
+.strava-loading { text-align: center; padding: 2rem; font-size: 0.85rem; color: var(--faint); }
+.strava-setup-note { margin-top: 1.5rem; font-size: 0.72rem; color: var(--faint); max-width: 44ch; margin-left: auto; margin-right: auto; line-height: 1.6; }
+.strava-setup-note code { background: var(--surface); padding: 0.1em 0.4em; border-radius: 2px; font-size: 0.85em; }
+
+/* ── BOOKS ── */
+.books-section { margin-bottom: 3rem; }
+.section-header-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+.section-header-count { font-size: 0.75rem; color: var(--faint); }
+.books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem; }
+.book-card { border: 1px solid var(--border); background: var(--bg2); border-radius: 2px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: block; }
+.book-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.07); }
+.book-cover { height: 150px; background: var(--surface); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.book-cover img { width: 100%; height: 100%; object-fit: cover; }
+.book-cover-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.book-info { padding: 1rem; }
+.book-title { font-family: var(--serif); font-size: 0.88rem; font-weight: 400; margin-bottom: 0.25rem; line-height: 1.35; }
+.book-author { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.5rem; }
+.book-status { font-size: 0.62rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; }
+.book-status.reading { color: var(--accent-ir); }
+.book-status.read { color: var(--accent-med); }
+.book-status.queue { color: var(--faint); }
+
+/* ── GALLERY ── */
+.gallery-section { margin-bottom: 3rem; }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+.gallery-item { position: relative; overflow: hidden; cursor: pointer; background: var(--surface); aspect-ratio: 1; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block; }
+.gallery-item:hover img { transform: scale(1.04); }
+.gallery-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; transition: background 0.2s; }
+.gallery-placeholder .icon { font-size: 2rem; opacity: 0.35; }
+.gallery-item:hover .gallery-placeholder { filter: brightness(0.96); }
+.gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,25,22,0.75) 0%, transparent 55%); opacity: 0; transition: opacity 0.3s; display: flex; align-items: flex-end; padding: 1.2rem; }
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-caption-title { font-family: var(--serif); font-size: 0.9rem; color: white; line-height: 1.3; }
+.gallery-caption-meta { font-size: 0.7rem; color: rgba(255,255,255,0.7); margin-top: 0.2rem; }
+.gallery-upload-hint { margin-top: 1.5rem; padding: 1rem 1.2rem; background: var(--bg); border: 1px dashed var(--border); border-radius: 2px; font-size: 0.78rem; color: var(--faint); text-align: center; }
+.gallery-upload-hint code { background: var(--surface); padding: 0.1em 0.4em; border-radius: 2px; }
+
+/* Lightbox */
+.lightbox { position: fixed; inset: 0; background: rgba(26,25,22,0.93); z-index: 500; display: none; align-items: center; justify-content: center; }
+.lightbox.open { display: flex; animation: fadeIn 0.2s ease; }
+.lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+.lightbox-inner img { max-width: 90vw; max-height: 78vh; object-fit: contain; display: block; border-radius: 2px; }
+.lightbox-placeholder { width: 360px; height: 280px; background: #2a2822; border-radius: 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; color: rgba(255,255,255,0.3); font-size: 3rem; }
+.lightbox-placeholder span { font-size: 0.85rem; font-family: var(--sans); }
+.lightbox-info { padding: 1rem 0 0; }
+.lightbox-info-title { font-family: var(--serif); font-size: 1rem; color: rgba(255,255,255,0.85); }
+.lightbox-info-meta { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-top: 0.2rem; }
+.lightbox-close { position: absolute; top: -2.8rem; right: 0; background: none; border: none; color: rgba(255,255,255,0.6); font-size: 1.4rem; cursor: pointer; transition: color 0.2s; line-height: 1; }
+.lightbox-close:hover { color: white; }
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: background 0.2s; display: flex; align-items: center; justify-content: center; }
+.lightbox-nav:hover { background: rgba(255,255,255,0.22); }
+.lightbox-prev { left: -3.5rem; }
+.lightbox-next { right: -3.5rem; }
+
+@media (max-width: 700px) {
   .topics-grid { grid-template-columns: repeat(2, 1fr); }
-  .rec-panel.active { grid-template-columns: 1fr; }
-  .post-row { grid-template-columns: 1fr; gap: 0.4rem; }
-  .post-row-meta { padding-top: 0; }
-  .post-row-cta { display: none; }
-}
-@media (max-width: 600px) {
-  nav { padding: 0 1.2rem; }
-  .nav-links { gap: 1rem; }
-  .nav-links a { font-size: 0.7rem; }
-  .topics-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid .stat-box:nth-child(2) { border-right: none; }
+  .stats-grid .stat-box:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+  .fitness-summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .fitness-summary-grid .stat-box:nth-child(2) { border-right: none; }
+  .fitness-summary-grid .stat-box:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+  .nav-links { gap: 0.8rem; }
+  .nav-links a { font-size: 0.68rem; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .books-grid { grid-template-columns: repeat(2, 1fr); }
+  .lightbox-prev { left: -2rem; }
+  .lightbox-next { right: -2rem; }
 }
 </style>
 </head>
 <body>
 
+<div class="toast" id="toast"></div>
+<div class="cal-tooltip" id="cal-tooltip"></div>
+
+<style>
+/* ── STRONG APP ── */
+.strong-import-area { text-align: center; padding: 2rem 1rem; border: 1px dashed var(--border); border-radius: 2px; background: var(--bg); transition: background 0.2s, border-color 0.2s; }
+.strong-import-area.drag-over { background: #eef4f1; border-color: var(--accent-med); }
+.strong-import-btn { display: inline-block; background: var(--text); color: var(--bg2); padding: 0.7rem 1.4rem; font-family: var(--sans); font-size: 0.78rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; border-radius: 2px; transition: opacity 0.2s; }
+.strong-import-btn:hover { opacity: 0.8; }
+.strong-clear-btn { font-size: 0.72rem; color: var(--faint); background: none; border: none; cursor: pointer; padding: 0; font-family: var(--sans); transition: color 0.2s; }
+.strong-clear-btn:hover { color: var(--muted); }
+.strong-exercise-row { display: flex; align-items: center; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--border); }
+.strong-exercise-name { flex: 1; font-size: 0.88rem; font-family: var(--serif); }
+.strong-exercise-bar-wrap { flex: 2; height: 6px; background: var(--surface); border-radius: 3px; overflow: hidden; }
+.strong-exercise-bar { height: 100%; background: var(--accent-fit); border-radius: 3px; transition: width 0.5s ease; }
+.strong-exercise-count { font-size: 0.75rem; color: var(--faint); width: 60px; text-align: right; }
+</style>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
+  <div class="lightbox-inner" id="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">&#8249;</button>
+    <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">&#8250;</button>
+    <div id="lightbox-content"></div>
+    <div class="lightbox-info">
+      <div class="lightbox-info-title" id="lightbox-title"></div>
+      <div class="lightbox-info-meta" id="lightbox-meta"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
 <nav>
-  <span class="nav-logo" onclick="showPage('home')">My Blog</span>
+  <span class="nav-logo" onclick="showPage('home')">Whittle Ideas</span>
   <ul class="nav-links">
     <li><a id="nav-home" class="active" onclick="showPage('home')">Home</a></li>
     <li><a id="nav-ir" onclick="showPage('ir')">Int'l Relations</a></li>
@@ -297,334 +279,360 @@ footer p { font-size: 0.8rem; font-weight: 300; color: var(--faint); }
   </ul>
 </nav>
 
-<!-- ═══ HOME ═══ -->
+<!-- HOME -->
 <div class="page active" id="page-home">
-
   <div class="home-hero">
-    <h1>Cowtowing about the things<br>that <em>actually matter to me.</em></h1>
-    <p>A personal blog covering international relations, fitness, meditation, and wood carving — four pursuits that have more in common than you might expect.</p>
+    <h1>Whittle Ideas:<br><em>Life in segments.</em></h1>
+    <p>A personal journal covering international relations, fitness, meditation, and wood carving. Thinking out loud, one chip at a time.</p>
   </div>
-
   <hr class="divider">
-
-  <div class="about-section">
-    <div><p class="section-label">About</p></div>
-    <div>
-      <h2>A few words about who writes here T.</h2>
-      <p>I follow geopolitics the way some people follow sport — obsessively, with opinions, and occasional heartbreak. I also train regularly, sit in meditation most mornings, and spend my weekends with a knife and a block of wood.</p>
-      <p>This blog is where those four worlds get equal time. I write to think things through, not to perform expertise. You'll find analysis alongside training logs, carving notes next to essays on statecraft.</p>
-      <p>Glad you're here.</p>
-    </div>
-  </div>
-
-  <hr class="divider">
-
   <div class="topics-section">
-    <p class="section-label">Four Topics</p>
     <div class="topics-grid">
       <button class="topic-tile" onclick="showPage('ir')">
         <div class="tile-accent" style="background:var(--accent-ir)"></div>
         <h3>International Relations</h3>
-        <p>Geopolitics, diplomacy, conflict, and the architecture of power.</p>
+        <p>Geopolitics, diplomacy, and a reading list on the forces shaping the world.</p>
         <span class="tile-cta">Read more →</span>
       </button>
       <button class="topic-tile" onclick="showPage('fitness')">
         <div class="tile-accent" style="background:var(--accent-fit)"></div>
         <h3>Fitness</h3>
-        <p>Training philosophy, programming, and what lifting teaches you about everything else.</p>
-        <span class="tile-cta">Read more →</span>
+        <p>Training logs, methodology, and live performance data via Strava.</p>
+        <span class="tile-cta">Track & Read →</span>
       </button>
       <button class="topic-tile" onclick="showPage('meditation')">
         <div class="tile-accent" style="background:var(--accent-med)"></div>
         <h3>Meditation</h3>
-        <p>Sitting practice, contemplative notes, and the discipline of stillness.</p>
-        <span class="tile-cta">Read more →</span>
+        <p>The discipline of stillness. Daily practice tracker and reflections.</p>
+        <span class="tile-cta">Practice →</span>
       </button>
       <button class="topic-tile" onclick="showPage('woodcarving')">
         <div class="tile-accent" style="background:var(--accent-wood)"></div>
         <h3>Wood Carving</h3>
-        <p>Projects, tools, techniques, and the slow satisfaction of making things by hand.</p>
-        <span class="tile-cta">Read more →</span>
+        <p>Projects, techniques, and the meditative craft of cutting wood.</p>
+        <span class="tile-cta">View Gallery →</span>
       </button>
     </div>
   </div>
-
-  <div class="posts-section">
-    <p class="section-label">Recent Posts</p>
-
-    <div class="post-row" onclick="showPage('ir')">
-      <div class="post-row-meta">April 12, 2025</div>
-      <div>
-        <span class="post-tag tag-ir">Int'l Relations</span>
-        <div class="post-row-title">The New Non-Alignment: How the Global South Is Rewriting the Rules</div>
-        <div class="post-row-excerpt">A new multipolar assertiveness is reshaping who gets to stay neutral — and what that neutrality actually costs.</div>
-      </div>
-      <div class="post-row-cta">Read →</div>
-    </div>
-
-    <div class="post-row" onclick="showPage('woodcarving')">
-      <div class="post-row-meta">April 5, 2025</div>
-      <div>
-        <span class="post-tag tag-wood">Wood Carving</span>
-        <div class="post-row-title">Six Weeks with a Spoon: Notes on Patience</div>
-        <div class="post-row-excerpt">A basswood spoon teaches you more about negative space than any design book.</div>
-      </div>
-      <div class="post-row-cta">Read →</div>
-    </div>
-
-    <div class="post-row" onclick="showPage('fitness')">
-      <div class="post-row-meta">March 28, 2025</div>
-      <div>
-        <span class="post-tag tag-fit">Fitness</span>
-        <div class="post-row-title">On Training Through Chaos: A Simple Block Approach</div>
-        <div class="post-row-excerpt">When life doesn't cooperate with a 12-week program, here's the minimalist framework I return to every time.</div>
-      </div>
-      <div class="post-row-cta">Read →</div>
-    </div>
-
-    <div class="post-row" onclick="showPage('meditation')">
-      <div class="post-row-meta">March 19, 2025</div>
-      <div>
-        <span class="post-tag tag-med">Meditation</span>
-        <div class="post-row-title">The Myth of the Empty Mind</div>
-        <div class="post-row-excerpt">Nobody tells beginners that the goal was never silence. Three years in, here's what I actually practice.</div>
-      </div>
-      <div class="post-row-cta">Read →</div>
-    </div>
-
-    <div class="post-row" onclick="showPage('ir')">
-      <div class="post-row-meta">March 8, 2025</div>
-      <div>
-        <span class="post-tag tag-ir">Int'l Relations</span>
-        <div class="post-row-title">Sanctions as Language: What We're Really Saying</div>
-        <div class="post-row-excerpt">Economic coercion tells us more about the sender than the target.</div>
-      </div>
-      <div class="post-row-cta">Read →</div>
-    </div>
-  </div>
-
-  <div class="recs-section">
-    <p class="section-label">Recommendations</p>
-    <div class="recs-tabs">
-      <button class="rec-tab active" onclick="switchTab(this,'books')">Books</button>
-      <button class="rec-tab" onclick="switchTab(this,'articles')">Articles &amp; Essays</button>
-    </div>
-
-    <div class="rec-panel active" id="panel-books">
-      <div class="rec-card">
-        <div class="rec-topic">International Relations</div>
-        <h4>The Clash of Civilizations and the Remaking of World Order</h4>
-        <div class="rec-author">Samuel P. Huntington</div>
-        <p>Still worth arguing with. Flawed but generative — it forces you to think harder about cultural fault lines in global politics.</p>
-      </div>
-      <div class="rec-card">
-        <div class="rec-topic">Fitness</div>
-        <h4>Practical Programming for Strength Training</h4>
-        <div class="rec-author">Mark Rippetoe &amp; Andy Baker</div>
-        <p>Clear-eyed about how adaptation works over time. The best resource I've found for understanding why programming decisions actually matter.</p>
-      </div>
-      <div class="rec-card">
-        <div class="rec-topic">Meditation</div>
-        <h4>The Mind Illuminated</h4>
-        <div class="rec-author">Culadasa (John Yates)</div>
-        <p>A rigorous map of meditative development that finally gave my practice a coherent framework. Dense but worth every page.</p>
-      </div>
-      <div class="rec-card">
-        <div class="rec-topic">Wood Carving</div>
-        <h4>The Woodwright's Shop</h4>
-        <div class="rec-author">Roy Underhill</div>
-        <p>Underhill's philosophy of hand-tool work changed how I think about making things. Warm, precise, and deeply practical.</p>
-      </div>
-      <div class="rec-card">
-        <div class="rec-topic">International Relations</div>
-        <h4>Prisoners of Geography</h4>
-        <div class="rec-author">Tim Marshall</div>
-        <p>A refreshingly physical account of world affairs — how mountains, rivers, and coastlines shape the decisions of states.</p>
-      </div>
-      <div class="rec-card">
-        <div class="rec-topic">Meditation</div>
-        <h4>Waking Up</h4>
-        <div class="rec-author">Sam Harris</div>
-        <p>A secular approach to contemplative practice. Best suited to those who find traditional frameworks a barrier to starting.</p>
-      </div>
-    </div>
-
-    <div class="rec-panel" id="panel-articles">
-      <div class="rec-card">
-        <div class="rec-topic">International Relations</div>
-        <h4>The Tragedy of Great Power Politics: A Primer</h4>
-        <div class="rec-author">John Mearsheimer — Foreign Affairs</div>
-        <p>A concise statement of offensive realism. Whether you agree or not, this framework clarifies your thinking about state behaviour.</p>
-      </div>
-      <div class="rec-card">
-        <div class="rec-topic">Fitness</div>
-        <h4>The Case for Training for Longevity, Not Performance</h4>
-        <div class="rec-author">Peter Attia — outlive.com</div>
-        <p>Reframed how I think about the purpose of training. The "Centenarian Decathlon" framing is now part of how I programme my own work.</p>
-      </div>
-      <div class="rec-card">
-        <div class="rec-topic">Meditation</div>
-        <h4>Mastering the Core Teachings of the Buddha</h4>
-        <div class="rec-author">Daniel Ingram — free PDF</div>
-        <p>Controversial and unflinching. Ingram insists on treating meditation as a skill with measurable outcomes. Even skeptics benefit from the challenge.</p>
-      </div>
-      <div class="rec-card">
-        <div class="rec-topic">Wood Carving</div>
-        <h4>Why Carve? The Case for Making Useless Things Well</h4>
-        <div class="rec-author">Barn the Spoon — barnthespoon.com</div>
-        <p>A philosophical defence of craft that resonated with me deeply. Short, honest, and surprisingly moving.</p>
-      </div>
-      <div class="rec-card">
-        <div class="rec-topic">International Relations</div>
-        <h4>This Is Not a Crisis, It's a Transition</h4>
-        <div class="rec-author">Adam Tooze — Chartbook</div>
-        <p>Tooze's newsletter consistently offers the most rigorous structural analysis of global economic politics available in essay form.</p>
-      </div>
-      <div class="rec-card">
-        <div class="rec-topic">Fitness</div>
-        <h4>The Specificity Trap: Why Training Hard Isn't Enough</h4>
-        <div class="rec-author">Chris Beardsley — medium.com</div>
-        <p>One of the clearest explanations of how specificity and variation interact in strength programming.</p>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <p>My Personal Blog</p>
-    <p>Written honestly. Updated when there's something worth saying.</p>
-  </footer>
+  <footer><p>© Whittle Ideas</p><p style="font-size:0.72rem;color:var(--faint);">A personal journal</p></footer>
 </div>
 
-<!-- ═══ INT'L RELATIONS ═══ -->
-<div class="page" id="page-ir">
-  <div class="topic-page-header">
-    <button class="back-btn" onclick="showPage('home')">← Back to home</button>
-    <div class="tp-accent" style="background:var(--accent-ir)"></div>
-    <h1>International Relations</h1>
-    <p>Geopolitics, diplomacy, and the slow machinery of power. I write about how states behave, why conflicts happen, and what the headlines usually miss.</p>
-  </div>
-  <div class="topic-posts">
-    <div class="tp-post">
-      <div class="tp-post-date">April 12, 2025</div>
-      <div class="tp-post-title">The New Non-Alignment: How the Global South Is Rewriting the Rules</div>
-      <div class="tp-post-excerpt">After decades of Cold War binaries, a new multipolar assertiveness is reshaping who gets to stay neutral — and what that neutrality actually costs. Countries from Brazil to India are leveraging ambiguity as strategic currency in ways that would have been unthinkable 30 years ago.</div>
-    </div>
-    <div class="tp-post">
-      <div class="tp-post-date">March 8, 2025</div>
-      <div class="tp-post-title">Sanctions as Language: What We're Really Saying</div>
-      <div class="tp-post-excerpt">Economic coercion tells us more about the sender than the target. When a coalition reaches for sanctions, it is broadcasting both resolve and limitation simultaneously — and adversaries have become expert at reading the signal beneath the noise.</div>
-    </div>
-    <div class="tp-post">
-      <div class="tp-post-date">February 20, 2025</div>
-      <div class="tp-post-title">What Offshore Balancing Actually Requires</div>
-      <div class="tp-post-excerpt">The theory is elegant. The execution is not. A look at what it would genuinely take for a major power to adopt a posture of offshore balancing — and why domestic politics almost always get in the way.</div>
-    </div>
-    <div class="tp-post">
-      <div class="tp-post-date">January 31, 2025</div>
-      <div class="tp-post-title">The Geography of Escalation: Why Terrain Still Matters</div>
-      <div class="tp-post-excerpt">Drones and satellites haven't eliminated the strategic significance of physical geography. A close reading of how topography shapes modern conflict thresholds.</div>
-    </div>
-  </div>
-  <footer>
-    <p>My Personal Blog</p>
-    <p><span style="cursor:pointer;color:var(--faint)" onclick="showPage('home')">← Return home</span></p>
-  </footer>
-</div>
-
-<!-- ═══ FITNESS ═══ -->
-<div class="page" id="page-fitness">
-  <div class="topic-page-header">
-    <button class="back-btn" onclick="showPage('home')">← Back to home</button>
-    <div class="tp-accent" style="background:var(--accent-fit)"></div>
-    <h1>Fitness</h1>
-    <p>Training logs, programming philosophy, and the honest accounting of what actually works over the long run. I've been lifting seriously for several years and still find it endlessly interesting.</p>
-  </div>
-  <div class="topic-posts">
-    <div class="tp-post">
-      <div class="tp-post-date">March 28, 2025</div>
-      <div class="tp-post-title">On Training Through Chaos: A Simple Block Approach</div>
-      <div class="tp-post-excerpt">When life doesn't cooperate with a 12-week program, here's the minimalist framework I return to every time. Three movements, two sessions per week, and the discipline to not make it more complicated than it needs to be.</div>
-    </div>
-    <div class="tp-post">
-      <div class="tp-post-date">February 14, 2025</div>
-      <div class="tp-post-title">What I've Learned from Two Years of Tracking Everything</div>
-      <div class="tp-post-excerpt">Two years of detailed logs, and the most important lessons had nothing to do with sets and reps. Sleep quality, life stress, and nutritional consistency explained more variance than any training variable I measured.</div>
-    </div>
-    <div class="tp-post">
-      <div class="tp-post-date">January 18, 2025</div>
-      <div class="tp-post-title">In Defence of Boring Programming</div>
-      <div class="tp-post-excerpt">The fitness content ecosystem is built on novelty. The actual physiological literature is built on consistency and progressive overload. These two facts are almost never discussed together honestly.</div>
-    </div>
-  </div>
-  <footer>
-    <p>My Personal Blog</p>
-    <p><span style="cursor:pointer;color:var(--faint)" onclick="showPage('home')">← Return home</span></p>
-  </footer>
-</div>
-
-<!-- ═══ MEDITATION ═══ -->
+<!-- MEDITATION -->
 <div class="page" id="page-meditation">
   <div class="topic-page-header">
     <button class="back-btn" onclick="showPage('home')">← Back to home</button>
     <div class="tp-accent" style="background:var(--accent-med)"></div>
     <h1>Meditation</h1>
-    <p>Notes from a sitting practice that has gone through several stages — enthusiasm, doubt, plateau, and something closer to genuine integration. I write about what I've actually experienced, not the idealised version.</p>
+    <p>The discipline of stillness.</p>
   </div>
   <div class="topic-posts">
+    <div class="tracker-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+        <p class="section-label">Daily Practice Tracker</p>
+        <button class="med-undo" id="med-undo-btn" onclick="undoMeditation()">↩ Undo today</button>
+      </div>
+
+      <div class="min-label">Session duration</div>
+      <div class="min-selector" id="min-selector">
+        <button class="min-btn" data-min="5" onclick="selectMinutes(5)">5 min</button>
+        <button class="min-btn" data-min="10" onclick="selectMinutes(10)">10 min</button>
+        <button class="min-btn" data-min="15" onclick="selectMinutes(15)">15 min</button>
+        <button class="min-btn" data-min="20" onclick="selectMinutes(20)">20 min</button>
+        <button class="min-btn" data-min="30" onclick="selectMinutes(30)">30 min</button>
+        <button class="min-btn" data-min="45" onclick="selectMinutes(45)">45 min</button>
+        <button class="min-btn" data-min="60" onclick="selectMinutes(60)">60 min</button>
+      </div>
+
+      <div class="med-check-area" id="med-check-area" onclick="toggleMeditation()">
+        <div class="med-check-box" id="med-check-box">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5L5 8.5L11.5 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="med-check-label" id="med-check-label">I meditated today</div>
+          <div class="med-check-sub" id="med-check-sub">Select a duration above, then tap to log</div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box"><div class="s-label">Sessions</div><div class="s-value" id="med-total">0</div><div class="s-unit">all time</div></div>
+        <div class="stat-box"><div class="s-label">Total Time</div><div class="s-value" id="med-minutes">0</div><div class="s-unit" id="med-minutes-unit">minutes</div></div>
+        <div class="stat-box"><div class="s-label">Streak</div><div class="s-value" id="med-streak">0</div><div class="s-unit">days in a row</div></div>
+        <div class="stat-box"><div class="s-label">Best Streak</div><div class="s-value" id="med-best">0</div><div class="s-unit">days</div></div>
+      </div>
+
+      <div>
+        <div class="cal-controls">
+          <div class="cal-label" id="cal-range-label">Last 28 days</div>
+          <div class="cal-zoom-btns">
+            <button class="cal-zoom-btn active" id="zoom-28" onclick="setCalZoom('28')">28d</button>
+            <button class="cal-zoom-btn" id="zoom-year" onclick="setCalZoom('year')">Year</button>
+            <button class="cal-zoom-btn" id="zoom-all" onclick="setCalZoom('all')">All time</button>
+          </div>
+        </div>
+        <div class="cal-heatmap-outer">
+          <div class="cal-heatmap" id="cal-heatmap"></div>
+        </div>
+      </div>
+    </div>
+
     <div class="tp-post">
-      <div class="tp-post-date">March 19, 2025</div>
+      <div class="tp-post-cat">Essay · Beginners</div>
       <div class="tp-post-title">The Myth of the Empty Mind</div>
-      <div class="tp-post-excerpt">Nobody tells beginners that the goal was never silence. Three years in, here's what I actually practice — and why the common framing of meditation as "quieting thoughts" is actively counterproductive for most people.</div>
+      <div class="tp-post-excerpt">Nobody tells beginners that the goal was never silence. The practice is noticing the noise — gently, without judgment — and returning, again and again, to the breath.</div>
+      <div class="tp-post-meta">March 2025 · 6 min read</div>
     </div>
     <div class="tp-post">
-      <div class="tp-post-date">February 3, 2025</div>
-      <div class="tp-post-title">On Consistency Without Motivation</div>
-      <div class="tp-post-excerpt">Most mornings I don't want to sit. I sit anyway. Here's the reasoning behind that — and why I think motivation is entirely the wrong frame for a daily practice.</div>
-    </div>
-    <div class="tp-post">
-      <div class="tp-post-date">January 9, 2025</div>
-      <div class="tp-post-title">What Meditation Has (and Hasn't) Done for Me</div>
-      <div class="tp-post-excerpt">An honest inventory after three years. The benefits are real but different from what I expected. The limitations are also real, and worth naming directly.</div>
+      <div class="tp-post-cat">Reflection · Consistency</div>
+      <div class="tp-post-title">On Sitting Still for 30 Days</div>
+      <div class="tp-post-excerpt">What a month of daily practice revealed about resistance, routine, and the small rewards that compound invisibly.</div>
+      <div class="tp-post-meta">February 2025 · 8 min read</div>
     </div>
   </div>
-  <footer>
-    <p>My Personal Blog</p>
-    <p><span style="cursor:pointer;color:var(--faint)" onclick="showPage('home')">← Return home</span></p>
-  </footer>
+  <footer><p>© Whittle Ideas</p></footer>
 </div>
 
-<!-- ═══ WOOD CARVING ═══ -->
+<!-- FITNESS -->
+<div class="page" id="page-fitness">
+  <div class="topic-page-header">
+    <button class="back-btn" onclick="showPage('home')">← Back to home</button>
+    <div class="tp-accent" style="background:var(--accent-fit)"></div>
+    <h1>Fitness</h1>
+    <p>Integrating physical effort with data.</p>
+  </div>
+  <div class="topic-posts">
+    <div class="tracker-card">
+      <p class="section-label" style="margin-bottom:1.5rem;">Strava Integration</p>
+      <div class="strava-error" id="strava-error"></div>
+      <div id="strava-unlinked" class="strava-unlinked">
+        <div class="strava-connect-area">
+          <div style="font-size:2.5rem;margin-bottom:1rem;">🟠</div>
+          <p style="font-size:0.9rem;color:var(--muted);max-width:38ch;margin:0 auto 1.5rem;line-height:1.75;font-weight:300;">Connect your Strava account to display your recent activities and weekly summary directly on this page.</p>
+          <button class="btn-strava" onclick="initiateStravaOAuth()">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L10.2 5.6H16L11.4 9.1L13.1 16L8 12.2L2.9 16L4.6 9.1L0 5.6H5.8L8 0Z"/></svg>
+            Connect with Strava
+          </button>
+          <p class="strava-note">You'll be redirected to Strava to authorise read access to your activities.</p>
+          <p class="strava-setup-note"><strong>Setup required:</strong> Fill in <code>STRAVA_CLIENT_ID</code> and <code>PROXY_BASE</code> in the script config. See the inline comments for how to set up the backend token proxy.</p>
+        </div>
+      </div>
+      <div id="strava-loading" style="display:none;" class="strava-loading">Loading your Strava data…</div>
+      <div id="strava-connected" class="strava-connected">
+        <div class="athlete-bar">
+          <div class="athlete-avatar" id="strava-avatar">?</div>
+          <div>
+            <div class="athlete-name" id="strava-name">—</div>
+            <div class="athlete-meta" id="strava-location">—</div>
+          </div>
+          <div class="strava-badge">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#FC6100"><path d="M8 0L10.2 5.6H16L11.4 9.1L13.1 16L8 12.2L2.9 16L4.6 9.1L0 5.6H5.8L8 0Z"/></svg>
+            Connected
+          </div>
+        </div>
+        <div class="fitness-summary-grid" style="margin-bottom:1.5rem;">
+          <div class="stat-box"><div class="s-label">This Week</div><div class="s-value" id="strava-weekly-km">—</div><div class="s-unit">km</div></div>
+          <div class="stat-box"><div class="s-label">Activities</div><div class="s-value" id="strava-weekly-acts">—</div><div class="s-unit">this week</div></div>
+          <div class="stat-box"><div class="s-label">Elevation</div><div class="s-value" id="strava-weekly-elev">—</div><div class="s-unit">metres gained</div></div>
+          <div class="stat-box"><div class="s-label">Move Time</div><div class="s-value" id="strava-weekly-time">—</div><div class="s-unit">this week</div></div>
+        </div>
+        <p class="section-label" style="margin-bottom:1rem;">Recent Activities</p>
+        <div class="activities-list" id="strava-activities"></div>
+        <button class="strava-disconnect" onclick="disconnectStrava()">Disconnect Strava</button>
+      </div>
+    </div>
+    <!-- STRONG APP -->
+    <div class="tracker-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+        <p class="section-label">Strong App — Lifting Stats</p>
+        <button class="strong-clear-btn" id="strong-clear-btn" onclick="clearStrongData()" style="display:none;">Clear data</button>
+      </div>
+      <div id="strong-unloaded">
+        <div class="strong-import-area" id="strong-drop-zone">
+          <div style="font-size:2rem;margin-bottom:0.75rem;">💪</div>
+          <p style="font-family:var(--serif);font-size:1rem;margin-bottom:0.5rem;">Import from Strong</p>
+          <p style="font-size:0.82rem;color:var(--muted);max-width:40ch;margin:0 auto 1.25rem;line-height:1.65;font-weight:300;">Export your workout history from the Strong app, then drop the CSV here to display your lifting stats.</p>
+          <label class="strong-import-btn">
+            Choose CSV file
+            <input type="file" accept=".csv" id="strong-file-input" onchange="handleStrongFile(event)" style="display:none;">
+          </label>
+          <p style="font-size:0.72rem;color:var(--faint);margin-top:1rem;">In Strong: <em>Settings → Export Data → Export Workout Data (CSV)</em></p>
+        </div>
+      </div>
+      <div id="strong-loaded" style="display:none;">
+        <div class="fitness-summary-grid" style="margin-bottom:1.5rem;" id="strong-summary-grid">
+          <div class="stat-box"><div class="s-label">Total Workouts</div><div class="s-value" id="strong-total-workouts">—</div><div class="s-unit">all time</div></div>
+          <div class="stat-box"><div class="s-label">This Month</div><div class="s-value" id="strong-month-workouts">—</div><div class="s-unit">sessions</div></div>
+          <div class="stat-box"><div class="s-label">Total Volume</div><div class="s-value" id="strong-total-volume">—</div><div class="s-unit" id="strong-volume-unit">tonnes</div></div>
+          <div class="stat-box"><div class="s-label">Avg Duration</div><div class="s-value" id="strong-avg-duration">—</div><div class="s-unit">minutes</div></div>
+        </div>
+        <p class="section-label" style="margin-bottom:1rem;">Recent Workouts</p>
+        <div class="activities-list" id="strong-workouts-list"></div>
+        <p class="section-label" style="margin-bottom:1rem; margin-top:1.5rem;">Most Trained Exercises</p>
+        <div id="strong-exercises-list"></div>
+      </div>
+    </div>
+
+    <div class="tp-post">
+      <div class="tp-post-cat">Training Log</div>
+      <div class="tp-post-title">Building Base: 12 Weeks to a Longer Long Run</div>
+      <div class="tp-post-excerpt">How I'm approaching aerobic base-building without burning out — borrowing from polarised training methodology.</div>
+      <div class="tp-post-meta">April 2025 · 7 min read</div>
+    </div>
+    <div class="tp-post">
+      <div class="tp-post-cat">Methodology</div>
+      <div class="tp-post-title">Why I Stopped Tracking Heart Rate Zones</div>
+      <div class="tp-post-excerpt">Data is only useful when it changes your behaviour. After two years of zone training, I started questioning the feedback loop.</div>
+      <div class="tp-post-meta">January 2025 · 5 min read</div>
+    </div>
+  </div>
+  <footer><p>© Whittle Ideas</p></footer>
+</div>
+
+<!-- INT'L RELATIONS -->
+<div class="page" id="page-ir">
+  <div class="topic-page-header">
+    <button class="back-btn" onclick="showPage('home')">← Back to home</button>
+    <div class="tp-accent" style="background:var(--accent-ir)"></div>
+    <h1>International Relations</h1>
+    <p>Geopolitics, diplomacy, and the forces shaping the world order.</p>
+  </div>
+  <div class="topic-posts">
+    <div class="books-section">
+      <div class="section-header-row">
+        <p class="section-label">Books Read</p>
+        <span class="section-header-count" id="books-count"></span>
+      </div>
+      <div class="books-grid" id="books-grid"></div>
+    </div>
+    <div class="tp-post">
+      <div class="tp-post-cat">Books · Geopolitics</div>
+      <div class="tp-post-title">The Geometry of Great Power Competition</div>
+      <div class="tp-post-excerpt">As multipolar dynamics solidify, the old bilateral frameworks for understanding US-China-Russia tensions increasingly fail to capture the emerging geometry of competition.</div>
+      <div class="tp-post-meta">March 2025 · 12 min read</div>
+    </div>
+    <div class="tp-post">
+      <div class="tp-post-cat">Books · Institutions</div>
+      <div class="tp-post-title">On the Slow Erosion of Multilateralism</div>
+      <div class="tp-post-excerpt">The institutions built after 1945 were designed for a world that no longer exists. What replaces them, and who decides?</div>
+      <div class="tp-post-meta">February 2025 · 9 min read</div>
+    </div>
+  </div>
+  <footer><p>© Whittle Ideas</p></footer>
+</div>
+
+<!-- WOOD CARVING -->
 <div class="page" id="page-woodcarving">
   <div class="topic-page-header">
     <button class="back-btn" onclick="showPage('home')">← Back to home</button>
     <div class="tp-accent" style="background:var(--accent-wood)"></div>
     <h1>Wood Carving</h1>
-    <p>Projects, tools, and the philosophy of working with your hands. I carve mostly spoons and small figures. The pace is slow by design.</p>
+    <p>Projects, techniques, and the meditative craft of cutting wood.</p>
   </div>
   <div class="topic-posts">
-    <div class="tp-post">
-      <div class="tp-post-date">April 5, 2025</div>
-      <div class="tp-post-title">Six Weeks with a Spoon: Notes on Patience</div>
-      <div class="tp-post-excerpt">A basswood spoon teaches you more about negative space than any design book. Here's what the grain told me this month — and why I deliberately didn't rush the final surface work even though it would have been fine.</div>
+    <div class="gallery-section">
+      <div class="section-header-row">
+        <p class="section-label">Project Gallery</p>
+        <span class="section-header-count" id="gallery-count"></span>
+      </div>
+      <div class="gallery-grid" id="gallery-grid"></div>
+      <div class="gallery-upload-hint">To add your photos, replace the <code>GALLERY_ITEMS</code> array in the script with your image URLs and captions.</div>
     </div>
     <div class="tp-post">
-      <div class="tp-post-date">March 2, 2025</div>
-      <div class="tp-post-title">The Three Knives I Actually Use</div>
-      <div class="tp-post-excerpt">After trying many more, I've settled on three tools that cover nearly everything: a sloyd knife, a hook knife, and a detail knife — with notes on how I choose between them for different work.</div>
+      <div class="tp-post-cat">Project Log</div>
+      <div class="tp-post-title">First Spoon: From Basswood Blank to Kitchen Table</div>
+      <div class="tp-post-excerpt">A beginner's honest account of the first carving project — the wrong tools, the grain surprises, and the unexpected satisfaction of a finished object.</div>
+      <div class="tp-post-meta">April 2025 · 6 min read</div>
     </div>
     <div class="tp-post">
-      <div class="tp-post-date">January 25, 2025</div>
-      <div class="tp-post-title">Why I Carve Green Wood Whenever Possible</div>
-      <div class="tp-post-excerpt">Dry wood is more predictable but green wood is more honest. Working with fresh-cut material changed my understanding of grain in a way that no dried blank ever could.</div>
+      <div class="tp-post-cat">Technique</div>
+      <div class="tp-post-title">Reading Grain: The Skill Nobody Teaches First</div>
+      <div class="tp-post-excerpt">Before you learn to hold a knife, you need to learn to read wood. The direction of grain determines almost everything about how a cut will behave.</div>
+      <div class="tp-post-meta">March 2025 · 8 min read</div>
     </div>
   </div>
-  <footer>
-    <p>My Personal Blog</p>
-    <p><span style="cursor:pointer;color:var(--faint)" onclick="showPage('home')">← Return home</span></p>
-  </footer>
+  <footer><p>© Whittle Ideas</p></footer>
 </div>
 
 <script>
+// ══════════════════════════════════════════
+//  ★  CONFIG — fill these in before hosting
+// ══════════════════════════════════════════
+const STRAVA_CONFIG = {
+  CLIENT_ID: 'YOUR_CLIENT_ID',        // From strava.com/settings/api
+  REDIRECT_URI: window.location.href.split('?')[0].split('#')[0],
+  // Your backend proxy base URL. It must expose:
+  //   POST /token  { code } → { access_token, refresh_token, expires_at, athlete }
+  //   POST /token  { refresh_token } → { access_token, expires_at }
+  //   GET  /activities (Authorization: Bearer <token>) → Strava activities array
+  // NEVER put your CLIENT_SECRET in this file — handle it in the proxy only.
+  PROXY_BASE: 'https://your-backend.example.com/strava',
+  SCOPE: 'read,activity:read',
+};
+
+/*
+ * ──────────────────────────────────────────────────────────────────
+ *  STRAVA PROXY SETUP (Node.js / Express example)
+ * ──────────────────────────────────────────────────────────────────
+ *  const express = require('express');
+ *  const cors = require('cors');
+ *  const app = express();
+ *  app.use(cors({ origin: 'https://your-site.com' }));
+ *  app.use(express.json());
+ *
+ *  const CLIENT_ID = process.env.STRAVA_CLIENT_ID;
+ *  const CLIENT_SECRET = process.env.STRAVA_CLIENT_SECRET;
+ *
+ *  app.post('/strava/token', async (req, res) => {
+ *    const body = req.body.code
+ *      ? { client_id: CLIENT_ID, client_secret: CLIENT_SECRET,
+ *          code: req.body.code, grant_type: 'authorization_code' }
+ *      : { client_id: CLIENT_ID, client_secret: CLIENT_SECRET,
+ *          refresh_token: req.body.refresh_token, grant_type: 'refresh_token' };
+ *    const r = await fetch('https://www.strava.com/oauth/token', {
+ *      method: 'POST', headers: {'Content-Type':'application/json'},
+ *      body: JSON.stringify(body)
+ *    });
+ *    res.json(await r.json());
+ *  });
+ *
+ *  app.get('/strava/activities', async (req, res) => {
+ *    const token = req.headers.authorization?.split(' ')[1];
+ *    const r = await fetch('https://www.strava.com/api/v3/athlete/activities?per_page=8', {
+ *      headers: { Authorization: 'Bearer ' + token }
+ *    });
+ *    res.json(await r.json());
+ *  });
+ *
+ *  app.listen(3001);
+ * ──────────────────────────────────────────────────────────────────
+ */
+
+// ══════════════════════════════════════════
+//  BOOKS DATA  — add / edit your books here
+// ══════════════════════════════════════════
+const BOOKS = [
+  { title: 'The End of the World Is Just the Beginning', author: 'Peter Zeihan', status: 'read', url: 'https://www.goodreads.com/book/show/58782897', cover: '', color: '#2d5a8e' },
+  { title: 'Destined for War', author: 'Graham Allison', status: 'read', url: 'https://www.goodreads.com/book/show/31798781', cover: '', color: '#3a4f6e' },
+  { title: 'The Clash of Civilizations', author: 'Samuel P. Huntington', status: 'read', url: 'https://www.goodreads.com/book/show/413179', cover: '', color: '#4a3060' },
+  { title: 'World Order', author: 'Henry Kissinger', status: 'reading', url: 'https://www.goodreads.com/book/show/20696140', cover: '', color: '#1a3a5c' },
+  { title: 'The Age of Surveillance Capitalism', author: 'Shoshana Zuboff', status: 'queue', url: 'https://www.goodreads.com/book/show/26195941', cover: '', color: '#2e4a3e' },
+  { title: 'Prisoners of Geography', author: 'Tim Marshall', status: 'read', url: 'https://www.goodreads.com/book/show/25135194', cover: '', color: '#5a3a1a' },
+];
+
+// ══════════════════════════════════════════
+//  GALLERY DATA — replace src with your URLs
+// ══════════════════════════════════════════
+const GALLERY_ITEMS = [
+  { title: 'First Spoon', meta: 'Basswood · March 2025', src: '' },
+  { title: 'Butter Spreader', meta: 'Cherry · April 2025', src: '' },
+  { title: 'Small Figure', meta: 'Lime wood · February 2025', src: '' },
+  { title: 'Letter Opener', meta: 'Walnut · January 2025', src: '' },
+  { title: 'Chip Carving Panel', meta: 'Butternut · December 2024', src: '' },
+  { title: 'Hook Knife Practice', meta: 'Basswood · November 2024', src: '' },
+];
+
+// ══════════════════════════════════════════
+//  NAVIGATION
+// ══════════════════════════════════════════
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
@@ -635,13 +643,741 @@ function showPage(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function switchTab(btn, tab) {
-  document.querySelectorAll('.rec-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.rec-panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  const panel = document.getElementById('panel-' + tab);
-  if (panel) panel.classList.add('active');
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
 }
+
+// ══════════════════════════════════════════
+//  MEDITATION TRACKER
+// ══════════════════════════════════════════
+const MED_KEY = 'whittle_med_v3';
+let selectedMinutes = 10;
+
+function loadMed() {
+  try { return JSON.parse(localStorage.getItem(MED_KEY)) || defMed(); } catch { return defMed(); }
+}
+function defMed() { return { total: 0, totalMinutes: 0, streak: 0, best: 0, history: [] }; }
+function saveMed(s) { localStorage.setItem(MED_KEY, JSON.stringify(s)); }
+function todayStr() { return new Date().toISOString().slice(0, 10); }
+
+function selectMinutes(m) {
+  selectedMinutes = m;
+  document.querySelectorAll('.min-btn').forEach(b => b.classList.toggle('selected', +b.dataset.min === m));
+  if (!isMeditatedToday()) {
+    document.getElementById('med-check-sub').textContent = 'Tap to log a ' + m + '-minute session today';
+  }
+}
+
+function recalcStreak(s) {
+  const dates = new Set(s.history.map(h => h.date || h));
+  if (!dates.size) { s.streak = 0; return; }
+  let streak = 0;
+  const check = new Date();
+  // If today not done, start from yesterday
+  if (!dates.has(todayStr())) check.setDate(check.getDate() - 1);
+  while (dates.has(check.toISOString().slice(0, 10))) {
+    streak++;
+    check.setDate(check.getDate() - 1);
+  }
+  s.streak = streak;
+}
+
+function isMeditatedToday() {
+  return loadMed().history.some(h => (h.date || h) === todayStr());
+}
+
+function renderMed() {
+  const s = loadMed();
+  recalcStreak(s);
+  saveMed(s);
+
+  document.getElementById('med-total').textContent = s.total;
+  document.getElementById('med-streak').textContent = s.streak + (s.streak >= 3 ? ' 🔥' : '');
+  document.getElementById('med-best').textContent = s.best;
+
+  const mins = s.totalMinutes || 0;
+  if (mins >= 60) {
+    document.getElementById('med-minutes').textContent = (mins / 60).toFixed(1);
+    document.getElementById('med-minutes-unit').textContent = 'hours total';
+  } else {
+    document.getElementById('med-minutes').textContent = mins;
+    document.getElementById('med-minutes-unit').textContent = 'minutes total';
+  }
+
+  const done = isMeditatedToday();
+  const area = document.getElementById('med-check-area');
+  document.getElementById('med-check-area').classList.toggle('checked', done);
+  document.getElementById('med-undo-btn').classList.toggle('visible', done);
+
+  if (done) {
+    const entry = s.history.find(h => (h.date || h) === todayStr());
+    const m = entry && entry.minutes ? entry.minutes : '?';
+    document.getElementById('med-check-label').textContent = '✓ Meditated today';
+    document.getElementById('med-check-sub').textContent = m + ' minutes logged — well done!';
+  } else {
+    document.getElementById('med-check-label').textContent = 'I meditated today';
+    document.getElementById('med-check-sub').textContent = 'Select a duration above, then tap to log';
+  }
+
+  renderCalendar(s, currentZoom);
+}
+
+function toggleMeditation() {
+  if (isMeditatedToday()) return;
+  const s = loadMed();
+  s.history.push({ date: todayStr(), minutes: selectedMinutes });
+  s.total++;
+  s.totalMinutes = (s.totalMinutes || 0) + selectedMinutes;
+  recalcStreak(s);
+  if (s.streak > s.best) s.best = s.streak;
+  saveMed(s);
+  renderMed();
+  showToast('Session logged 🧘 ' + selectedMinutes + ' minutes — keep it up!');
+}
+
+function undoMeditation() {
+  const s = loadMed();
+  const idx = s.history.findIndex(h => (h.date || h) === todayStr());
+  if (idx === -1) return;
+  const entry = s.history[idx];
+  s.totalMinutes = Math.max(0, (s.totalMinutes || 0) - (entry.minutes || 0));
+  s.history.splice(idx, 1);
+  s.total = Math.max(0, s.total - 1);
+  recalcStreak(s);
+  saveMed(s);
+  renderMed();
+  showToast('Today\'s session removed.');
+}
+
+let currentZoom = '28';
+
+function setCalZoom(zoom) {
+  currentZoom = zoom;
+  ['28', 'year', 'all'].forEach(z => document.getElementById('zoom-' + z).classList.toggle('active', z === zoom));
+  document.getElementById('cal-range-label').textContent = { '28': 'Last 28 days', 'year': 'This year (' + new Date().getFullYear() + ')', 'all': 'All time' }[zoom];
+  renderCalendar(loadMed(), zoom);
+}
+
+// Tooltip
+const tooltip = document.getElementById('cal-tooltip');
+function showCalTooltip(e, text) {
+  tooltip.textContent = text;
+  tooltip.classList.add('visible');
+  moveCalTooltip(e);
+}
+function moveCalTooltip(e) {
+  tooltip.style.left = (e.clientX + 12) + 'px';
+  tooltip.style.top = (e.clientY - 32) + 'px';
+}
+function hideCalTooltip() { tooltip.classList.remove('visible'); }
+
+function makeCellEl(iso, minutesMap, todayISO) {
+  const el = document.createElement('div');
+  const mins = minutesMap[iso] || 0;
+  const isToday = iso === todayISO;
+  let doneClass = '';
+  if (mins > 0) {
+    if (mins <= 10) doneClass = ' done-1';
+    else if (mins <= 20) doneClass = ' done-2';
+    else if (mins <= 35) doneClass = ' done-3';
+    else doneClass = ' done-4';
+  }
+  el.className = 'cal-cell' + doneClass + (isToday ? ' today' : '');
+  if (iso) {
+    const label = iso + (mins > 0 ? ' · ' + mins + ' min' : ' · No session');
+    el.addEventListener('mouseenter', e => showCalTooltip(e, label));
+    el.addEventListener('mousemove', moveCalTooltip);
+    el.addEventListener('mouseleave', hideCalTooltip);
+  }
+  return el;
+}
+
+function renderCalendar(s, zoom) {
+  const container = document.getElementById('cal-heatmap');
+  container.innerHTML = '';
+
+  // Build minutes map: date → minutes
+  const minutesMap = {};
+  s.history.forEach(h => {
+    const d = h.date || h;
+    minutesMap[d] = (minutesMap[d] || 0) + (h.minutes || 0);
+  });
+  const todayISO = todayStr();
+  const DAYS_SHORT = ['S','M','T','W','T','F','S']; // Sun=0
+
+  // Build week columns from a start date to today
+  function buildColumns(startDate, endDate, showMonths) {
+    // Align start to Sunday
+    const alignedStart = new Date(startDate);
+    alignedStart.setDate(alignedStart.getDate() - alignedStart.getDay());
+
+    // Day labels column (only show Mon, Wed, Fri)
+    const dayLabels = document.createElement('div');
+    dayLabels.className = 'cal-day-labels';
+    ['S','M','T','W','T','F','S'].forEach((d, i) => {
+      const lbl = document.createElement('div');
+      lbl.className = 'cal-day-label' + ([1,3,5].includes(i) ? '' : ' hidden');
+      lbl.textContent = d;
+      dayLabels.appendChild(lbl);
+    });
+    container.appendChild(dayLabels);
+
+    const colsWrap = document.createElement('div');
+    colsWrap.className = 'cal-columns-wrap';
+
+    // Month label row
+    const monthRow = document.createElement('div');
+    monthRow.className = 'cal-month-labels';
+    colsWrap.appendChild(monthRow);
+
+    const colsDiv = document.createElement('div');
+    colsDiv.className = 'cal-columns';
+    colsWrap.appendChild(colsDiv);
+    container.appendChild(colsWrap);
+
+    const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    let lastMonthShown = -1;
+    let colIndex = 0;
+
+    let cursor = new Date(alignedStart);
+    while (cursor <= endDate) {
+      const col = document.createElement('div');
+      col.className = 'cal-column';
+
+      // Month label placeholder for this column position
+      const weekStart = new Date(cursor);
+      const monthOfWeek = weekStart.getMonth();
+      const monthLbl = document.createElement('div');
+      monthLbl.className = 'cal-month-label';
+      monthLbl.style.minWidth = '13px';
+      if (showMonths && monthOfWeek !== lastMonthShown && weekStart.getDate() <= 7) {
+        monthLbl.textContent = MONTHS[monthOfWeek];
+        lastMonthShown = monthOfWeek;
+      }
+      monthRow.appendChild(monthLbl);
+
+      for (let d = 0; d < 7; d++) {
+        const day = new Date(cursor); day.setDate(day.getDate() + d);
+        if (day < startDate || day > endDate) {
+          const empty = document.createElement('div');
+          empty.className = 'cal-cell empty';
+          col.appendChild(empty);
+        } else {
+          const iso = day.toISOString().slice(0, 10);
+          col.appendChild(makeCellEl(iso, minutesMap, todayISO));
+        }
+      }
+      colsDiv.appendChild(col);
+      cursor.setDate(cursor.getDate() + 7);
+      colIndex++;
+    }
+  }
+
+  const now = new Date();
+
+  if (zoom === '28') {
+    const start = new Date(now); start.setDate(start.getDate() - 27);
+    buildColumns(start, now, false);
+
+  } else if (zoom === 'year') {
+    const year = now.getFullYear();
+    const start = new Date(year, 0, 1);
+    buildColumns(start, now, true);
+
+  } else {
+    // All time
+    const allDates = Object.keys(minutesMap).sort();
+    if (!allDates.length) {
+      container.innerHTML = '<div style="padding:1rem 0;font-size:0.8rem;color:var(--faint);">No sessions yet — start your streak!</div>';
+      return;
+    }
+    const start = new Date(allDates[0]);
+    buildColumns(start, now, true);
+  }
+}
+
+// ══════════════════════════════════════════
+//  STRAVA — OAuth 2.0 + Real API Calls
+// ══════════════════════════════════════════
+const STRAVA_KEY = 'whittle_strava_v2';
+function getStravaState() { try { return JSON.parse(localStorage.getItem(STRAVA_KEY)) || {}; } catch { return {}; } }
+function setStravaState(obj) { localStorage.setItem(STRAVA_KEY, JSON.stringify(obj)); }
+function clearStravaState() { localStorage.removeItem(STRAVA_KEY); }
+
+function showStravaError(msg) {
+  const el = document.getElementById('strava-error');
+  el.textContent = msg; el.classList.add('visible');
+}
+function hideStravaError() { document.getElementById('strava-error').classList.remove('visible'); }
+
+function initiateStravaOAuth() {
+  if (!STRAVA_CONFIG.CLIENT_ID || STRAVA_CONFIG.CLIENT_ID === 'YOUR_CLIENT_ID') {
+    showStravaError('Strava is not configured yet. Open the HTML file and set STRAVA_CONFIG.CLIENT_ID and STRAVA_CONFIG.PROXY_BASE.');
+    return;
+  }
+  const state = Math.random().toString(36).slice(2);
+  sessionStorage.setItem('strava_state', state);
+  const p = new URLSearchParams({
+    client_id: STRAVA_CONFIG.CLIENT_ID,
+    response_type: 'code',
+    redirect_uri: STRAVA_CONFIG.REDIRECT_URI,
+    approval_prompt: 'auto',
+    scope: STRAVA_CONFIG.SCOPE,
+    state,
+  });
+  window.location.href = 'https://www.strava.com/oauth/authorize?' + p.toString();
+}
+
+async function handleOAuthCallback() {
+  const p = new URLSearchParams(window.location.search);
+  const code = p.get('code'), state = p.get('state'), error = p.get('error');
+  if (error) { showStravaError('Strava authorisation denied: ' + error); return; }
+  if (!code) return;
+  history.replaceState({}, '', window.location.pathname);
+
+  const saved = sessionStorage.getItem('strava_state');
+  sessionStorage.removeItem('strava_state');
+  if (state && saved && state !== saved) { showStravaError('OAuth state mismatch. Please try again.'); return; }
+  if (!STRAVA_CONFIG.PROXY_BASE || STRAVA_CONFIG.PROXY_BASE.includes('your-backend')) {
+    showStravaError('Backend proxy URL not configured. Set STRAVA_CONFIG.PROXY_BASE.'); return;
+  }
+
+  showPage('fitness');
+  document.getElementById('strava-loading').style.display = 'block';
+  document.getElementById('strava-unlinked').classList.add('hidden');
+  hideStravaError();
+
+  try {
+    const res = await fetch(STRAVA_CONFIG.PROXY_BASE + '/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    });
+    if (!res.ok) throw new Error('Token exchange failed (' + res.status + ')');
+    const data = await res.json();
+    if (data.errors) throw new Error('Strava error: ' + JSON.stringify(data.errors));
+    setStravaState({ access_token: data.access_token, refresh_token: data.refresh_token, expires_at: data.expires_at, athlete: data.athlete });
+    await loadStravaData();
+  } catch (err) {
+    document.getElementById('strava-loading').style.display = 'none';
+    document.getElementById('strava-unlinked').classList.remove('hidden');
+    showStravaError('Connection failed: ' + err.message);
+  }
+}
+
+async function ensureFreshToken() {
+  const st = getStravaState();
+  if (!st.expires_at || Date.now() / 1000 < st.expires_at - 120) return st.access_token;
+  const res = await fetch(STRAVA_CONFIG.PROXY_BASE + '/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ refresh_token: st.refresh_token }),
+  });
+  if (!res.ok) throw new Error('Token refresh failed');
+  const data = await res.json();
+  setStravaState({ ...st, access_token: data.access_token, expires_at: data.expires_at });
+  return data.access_token;
+}
+
+async function stravaGet(path) {
+  const token = await ensureFreshToken();
+  const res = await fetch(STRAVA_CONFIG.PROXY_BASE + path, { headers: { Authorization: 'Bearer ' + token } });
+  if (res.status === 401) throw new Error('Strava authentication expired. Please reconnect.');
+  if (!res.ok) throw new Error('Strava API error ' + res.status);
+  return res.json();
+}
+
+async function loadStravaData() {
+  const st = getStravaState();
+  if (!st.access_token) return;
+  document.getElementById('strava-loading').style.display = 'block';
+  document.getElementById('strava-unlinked').classList.add('hidden');
+  document.getElementById('strava-connected').classList.remove('visible');
+  hideStravaError();
+
+  try {
+    const activities = await stravaGet('/activities?per_page=8');
+    const athlete = st.athlete || {};
+
+    // Athlete bar
+    const av = document.getElementById('strava-avatar');
+    if (athlete.profile_medium && !athlete.profile_medium.includes('avatar')) {
+      av.innerHTML = `<img src="${athlete.profile_medium}" alt="">`;
+    } else {
+      av.textContent = (athlete.firstname || '?')[0].toUpperCase();
+    }
+    document.getElementById('strava-name').textContent = [athlete.firstname, athlete.lastname].filter(Boolean).join(' ') || 'Athlete';
+    document.getElementById('strava-location').textContent = [athlete.city, athlete.country].filter(Boolean).join(', ') || 'Strava Athlete';
+
+    // This week
+    const weekAgo = Date.now() - 7 * 86400000;
+    const wk = activities.filter(a => new Date(a.start_date).getTime() > weekAgo);
+    const wkKm = wk.reduce((t, a) => t + (a.distance || 0), 0) / 1000;
+    document.getElementById('strava-weekly-km').textContent = wkKm.toFixed(1);
+    document.getElementById('strava-weekly-acts').textContent = wk.length;
+    document.getElementById('strava-weekly-elev').textContent = Math.round(wk.reduce((t, a) => t + (a.total_elevation_gain || 0), 0));
+    document.getElementById('strava-weekly-time').textContent = fmtSecs(wk.reduce((t, a) => t + (a.moving_time || 0), 0));
+
+    // Activity list
+    const list = document.getElementById('strava-activities');
+    list.innerHTML = '';
+    activities.slice(0, 6).forEach(act => {
+      const km = ((act.distance || 0) / 1000).toFixed(1);
+      const elev = Math.round(act.total_elevation_gain || 0);
+      const speed = act.type === 'Ride' ? ((act.average_speed || 0) * 3.6).toFixed(1) + ' km/h' : fmtPace(act.average_speed);
+      const dateStr = new Date(act.start_date_local || act.start_date).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+      const row = document.createElement('div');
+      row.className = 'activity-row';
+      row.innerHTML = `<div class="act-icon">${actIcon(act.type)}</div><div class="act-info"><div class="act-name">${act.name}</div><div class="act-date">${dateStr} · ${act.type}</div></div><div class="act-stats"><div><div class="act-stat-val">${km} km</div><div class="act-stat-lbl">Distance</div></div><div><div class="act-stat-val">${speed}</div><div class="act-stat-lbl">${act.type==='Ride'?'Speed':'Pace'}</div></div><div><div class="act-stat-val">${elev}m</div><div class="act-stat-lbl">Elev.</div></div></div>`;
+      list.appendChild(row);
+    });
+
+    document.getElementById('strava-loading').style.display = 'none';
+    document.getElementById('strava-connected').classList.add('visible');
+  } catch (err) {
+    document.getElementById('strava-loading').style.display = 'none';
+    document.getElementById('strava-unlinked').classList.remove('hidden');
+    showStravaError('Could not load Strava data: ' + err.message);
+  }
+}
+
+function fmtPace(mps) {
+  if (!mps) return '—';
+  const spk = 1000 / mps;
+  return Math.floor(spk / 60) + ':' + String(Math.round(spk % 60)).padStart(2, '0') + ' /km';
+}
+function fmtSecs(s) {
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60);
+  return h > 0 ? h + 'h ' + m + 'm' : m + 'm';
+}
+function actIcon(t) {
+  return { Run:'🏃', Ride:'🚴', Swim:'🏊', Walk:'🚶', Hike:'🥾', WeightTraining:'🏋️', Yoga:'🧘', VirtualRide:'🚴', VirtualRun:'🏃' }[t] || '⚡';
+}
+
+function disconnectStrava() {
+  clearStravaState();
+  document.getElementById('strava-connected').classList.remove('visible');
+  document.getElementById('strava-unlinked').classList.remove('hidden');
+  showToast('Strava disconnected.');
+}
+
+// ══════════════════════════════════════════
+//  BOOKS
+// ══════════════════════════════════════════
+function renderBooks() {
+  const grid = document.getElementById('books-grid');
+  const count = document.getElementById('books-count');
+  const read = BOOKS.filter(b => b.status === 'read').length;
+  count.textContent = read + ' book' + (read !== 1 ? 's' : '') + ' read';
+  const labels = { reading: 'Currently Reading', read: 'Read', queue: 'To Read' };
+  grid.innerHTML = '';
+  BOOKS.forEach(b => {
+    const card = document.createElement('a');
+    card.className = 'book-card';
+    card.href = b.url || '#'; card.target = '_blank'; card.rel = 'noopener';
+    const cover = b.cover
+      ? `<img src="${b.cover}" alt="${b.title}">`
+      : `<div class="book-cover-placeholder" style="background:${b.color || '#2d5a8e'}18;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem;opacity:0.3;">📖</div>`;
+    card.innerHTML = `<div class="book-cover">${cover}</div><div class="book-info"><div class="book-title">${b.title}</div><div class="book-author">${b.author}</div><div class="book-status ${b.status}">${labels[b.status] || b.status}</div></div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ══════════════════════════════════════════
+//  GALLERY + LIGHTBOX
+// ══════════════════════════════════════════
+let lbIndex = 0;
+
+function renderGallery() {
+  const grid = document.getElementById('gallery-grid');
+  document.getElementById('gallery-count').textContent = GALLERY_ITEMS.length + ' project' + (GALLERY_ITEMS.length !== 1 ? 's' : '');
+  grid.innerHTML = '';
+  const bgColors = ['#e8e2d8','#ece5d5','#e5e0d0','#ede7dc','#e9e3d9','#e6e1d4'];
+  GALLERY_ITEMS.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'gallery-item';
+    el.onclick = () => openLightbox(i);
+    const inner = item.src
+      ? `<img src="${item.src}" alt="${item.title}" loading="lazy">`
+      : `<div class="gallery-placeholder" style="background:${bgColors[i % bgColors.length]};"><div class="icon">🪵</div><div>${item.title}</div><div style="font-size:0.65rem;opacity:0.6;margin-top:0.1rem;">${item.meta}</div></div>`;
+    el.innerHTML = inner + `<div class="gallery-overlay"><div><div class="gallery-caption-title">${item.title}</div><div class="gallery-caption-meta">${item.meta}</div></div></div>`;
+    grid.appendChild(el);
+  });
+}
+
+function openLightbox(i) {
+  lbIndex = i; updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function updateLightbox() {
+  const item = GALLERY_ITEMS[lbIndex];
+  const content = document.getElementById('lightbox-content');
+  if (item.src) {
+    content.innerHTML = `<img src="${item.src}" alt="${item.title}">`;
+  } else {
+    content.innerHTML = `<div class="lightbox-placeholder"><div>🪵</div><span>${item.title}</span></div>`;
+  }
+  document.getElementById('lightbox-title').textContent = item.title;
+  document.getElementById('lightbox-meta').textContent = item.meta;
+}
+
+function lightboxNav(dir) {
+  lbIndex = (lbIndex + dir + GALLERY_ITEMS.length) % GALLERY_ITEMS.length;
+  updateLightbox();
+}
+
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+function closeLightboxBg(e) { if (e.target === document.getElementById('lightbox')) closeLightbox(); }
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') lightboxNav(1);
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+});
+
+// ══════════════════════════════════════════
+//  STRONG APP — CSV IMPORT
+// ══════════════════════════════════════════
+/*
+ * HOW TO EXPORT FROM STRONG:
+ * 1. Open Strong app → tap your profile icon
+ * 2. Go to Settings → Export Data
+ * 3. Tap "Export Workout Data (CSV)"
+ * 4. Share / save the CSV file, then drop it here
+ *
+ * Strong CSV format:
+ * Date,Workout Name,Duration,Exercise Name,Set Order,Weight,Reps,Distance,Seconds,Notes,Workout Notes,RPE
+ */
+const STRONG_KEY = 'whittle_strong_v1';
+
+function loadStrongData() {
+  try { return JSON.parse(localStorage.getItem(STRONG_KEY)) || null; } catch { return null; }
+}
+function saveStrongData(d) { localStorage.setItem(STRONG_KEY, JSON.stringify(d)); }
+function clearStrongData() {
+  localStorage.removeItem(STRONG_KEY);
+  document.getElementById('strong-loaded').style.display = 'none';
+  document.getElementById('strong-unloaded').style.display = 'block';
+  document.getElementById('strong-clear-btn').style.display = 'none';
+  showToast('Strong data cleared.');
+}
+
+function handleStrongFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => parseStrongCSV(e.target.result);
+  reader.readAsText(file);
+}
+
+// Drag and drop
+(function setupDrop() {
+  const zone = document.getElementById('strong-drop-zone');
+  if (!zone) return;
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file && file.name.endsWith('.csv')) {
+      const reader = new FileReader();
+      reader.onload = ev => parseStrongCSV(ev.target.result);
+      reader.readAsText(file);
+    } else {
+      showToast('Please drop a .csv file exported from Strong.');
+    }
+  });
+})();
+
+function parseStrongCSV(text) {
+  // Handle BOM
+  if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  if (!lines.length) { showToast('CSV appears to be empty.'); return; }
+
+  // Parse header
+  const header = parseCSVLine(lines[0]).map(h => h.trim().toLowerCase());
+  const col = name => header.indexOf(name);
+
+  const iDate = col('date'), iWorkout = col('workout name'), iDuration = col('duration');
+  const iExercise = col('exercise name'), iWeight = col('weight'), iReps = col('reps');
+  const iDistance = col('distance');
+
+  if (iDate === -1 || iWorkout === -1) {
+    showToast('Unrecognised CSV format. Please export from Strong app.');
+    return;
+  }
+
+  // Group rows into workouts by (date, workout name)
+  const workoutMap = {}; // key → { date, name, duration, exercises: { name → sets[] } }
+  const exerciseCounts = {}; // exercise name → total sets
+
+  for (let i = 1; i < lines.length; i++) {
+    const cols = parseCSVLine(lines[i]);
+    if (!cols.length) continue;
+
+    const rawDate = cols[iDate] || '';
+    // Strong dates can be "2024-03-15 07:30:00" or "2024-03-15"
+    const date = rawDate.slice(0, 10);
+    const workout = cols[iWorkout] || 'Workout';
+    const key = date + '|' + workout;
+
+    if (!workoutMap[key]) {
+      const durStr = iDuration !== -1 ? (cols[iDuration] || '') : '';
+      workoutMap[key] = { date, name: workout, durationStr: durStr, sets: [] };
+    }
+
+    const exercise = iExercise !== -1 ? (cols[iExercise] || '') : '';
+    const weight = iWeight !== -1 ? parseFloat(cols[iWeight]) || 0 : 0;
+    const reps = iReps !== -1 ? parseInt(cols[iReps]) || 0 : 0;
+    const distance = iDistance !== -1 ? parseFloat(cols[iDistance]) || 0 : 0;
+
+    workoutMap[key].sets.push({ exercise, weight, reps, distance });
+    if (exercise) exerciseCounts[exercise] = (exerciseCounts[exercise] || 0) + 1;
+  }
+
+  const workouts = Object.values(workoutMap).sort((a, b) => b.date.localeCompare(a.date));
+
+  // Compute stats
+  let totalVolume = 0; // kg
+  let totalDurationMins = 0;
+  let parsedDurations = 0;
+
+  workouts.forEach(w => {
+    w.sets.forEach(s => { totalVolume += s.weight * s.reps; });
+    // Duration strings: "1h 23m" or "45m" or "1:23:00"
+    const dur = parseDurationToMins(w.durationStr);
+    if (dur > 0) { totalDurationMins += dur; parsedDurations++; }
+  });
+
+  const avgDuration = parsedDurations > 0 ? Math.round(totalDurationMins / parsedDurations) : 0;
+  const now = new Date();
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0, 10);
+  const monthCount = workouts.filter(w => w.date >= monthStart).length;
+
+  const topExercises = Object.entries(exerciseCounts)
+    .sort((a, b) => b[1] - a[1]).slice(0, 8);
+
+  const parsed = { workouts, totalVolume, avgDuration, monthCount, topExercises, importedAt: new Date().toISOString() };
+  saveStrongData(parsed);
+  renderStrongData(parsed);
+  showToast('Strong data imported — ' + workouts.length + ' workouts loaded!');
+}
+
+function parseDurationToMins(str) {
+  if (!str) return 0;
+  // "1h 23m" format
+  const hm = str.match(/(\d+)h\s*(\d+)m/);
+  if (hm) return parseInt(hm[1]) * 60 + parseInt(hm[2]);
+  const h = str.match(/(\d+)h/);
+  if (h) return parseInt(h[1]) * 60;
+  const m = str.match(/(\d+)m/);
+  if (m) return parseInt(m[1]);
+  // "1:23:00" format
+  const colon = str.match(/^(\d+):(\d+):(\d+)$/);
+  if (colon) return parseInt(colon[1]) * 60 + parseInt(colon[2]);
+  const colon2 = str.match(/^(\d+):(\d+)$/);
+  if (colon2) return parseInt(colon2[1]);
+  return 0;
+}
+
+function parseCSVLine(line) {
+  const result = [];
+  let cur = '', inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') { inQuotes = !inQuotes; }
+    else if (c === ',' && !inQuotes) { result.push(cur); cur = ''; }
+    else { cur += c; }
+  }
+  result.push(cur);
+  return result;
+}
+
+function renderStrongData(data) {
+  if (!data) return;
+  document.getElementById('strong-unloaded').style.display = 'none';
+  document.getElementById('strong-loaded').style.display = 'block';
+  document.getElementById('strong-clear-btn').style.display = 'inline';
+
+  document.getElementById('strong-total-workouts').textContent = data.workouts.length;
+  document.getElementById('strong-month-workouts').textContent = data.monthCount;
+  document.getElementById('strong-avg-duration').textContent = data.avgDuration || '—';
+
+  const volTonnes = (data.totalVolume / 1000).toFixed(1);
+  if (data.totalVolume > 1000) {
+    document.getElementById('strong-total-volume').textContent = volTonnes;
+    document.getElementById('strong-volume-unit').textContent = 'tonnes lifted';
+  } else {
+    document.getElementById('strong-total-volume').textContent = Math.round(data.totalVolume);
+    document.getElementById('strong-volume-unit').textContent = 'kg lifted';
+  }
+
+  // Recent workouts list
+  const list = document.getElementById('strong-workouts-list');
+  list.innerHTML = '';
+  data.workouts.slice(0, 5).forEach(w => {
+    const setCount = w.sets.length;
+    const exercises = [...new Set(w.sets.map(s => s.exercise).filter(Boolean))];
+    const vol = w.sets.reduce((t, s) => t + s.weight * s.reps, 0);
+    const row = document.createElement('div');
+    row.className = 'activity-row';
+    row.innerHTML = `
+      <div class="act-icon">🏋️</div>
+      <div class="act-info">
+        <div class="act-name">${w.name}</div>
+        <div class="act-date">${w.date} · ${exercises.slice(0, 3).join(', ')}${exercises.length > 3 ? '…' : ''}</div>
+      </div>
+      <div class="act-stats">
+        <div><div class="act-stat-val">${setCount}</div><div class="act-stat-lbl">Sets</div></div>
+        <div><div class="act-stat-val">${vol > 0 ? (vol >= 1000 ? (vol/1000).toFixed(1)+'t' : Math.round(vol)+'kg') : '—'}</div><div class="act-stat-lbl">Volume</div></div>
+        ${w.durationStr ? `<div><div class="act-stat-val">${w.durationStr}</div><div class="act-stat-lbl">Duration</div></div>` : ''}
+      </div>`;
+    list.appendChild(row);
+  });
+
+  // Top exercises bar chart
+  const exList = document.getElementById('strong-exercises-list');
+  exList.innerHTML = '';
+  const maxCount = data.topExercises[0]?.[1] || 1;
+  data.topExercises.forEach(([name, count]) => {
+    const pct = Math.round((count / maxCount) * 100);
+    const row = document.createElement('div');
+    row.className = 'strong-exercise-row';
+    row.innerHTML = `
+      <div class="strong-exercise-name">${name}</div>
+      <div class="strong-exercise-bar-wrap"><div class="strong-exercise-bar" style="width:${pct}%"></div></div>
+      <div class="strong-exercise-count">${count} sets</div>`;
+    exList.appendChild(row);
+  });
+}
+
+// ══════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════
+(async function init() {
+  selectMinutes(10);
+  renderMed();
+  renderBooks();
+  renderGallery();
+  const storedStrong = loadStrongData();
+  if (storedStrong) renderStrongData(storedStrong);
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('code') || params.get('error')) {
+    await handleOAuthCallback();
+  } else {
+    const st = getStravaState();
+    if (st.access_token) {
+      await loadStravaData().catch(err => showStravaError(err.message));
+    }
+  }
+})();
 </script>
 </body>
 </html>
