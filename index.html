@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Personal Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f5f0;
+  --bg2: #ffffff;
+  --surface: #efede8;
+  --border: #dedad2;
+  --text: #1a1916;
+  --muted: #7a766e;
+  --faint: #b0ab9f;
+  --accent-ir: #2d5a8e;
+  --accent-fit: #7a3d2e;
+  --accent-med: #3d6b55;
+  --accent-wood: #8a6233;
+  --serif: 'Libre Baskerville', Georgia, serif;
+  --sans: 'Jost', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.page { display: none; }
+.page.active { display: block; animation: fadeIn 0.3s ease both; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+
+.nav-logo {
+  font-family: var(--serif); font-size: 1rem; font-style: italic;
+  color: var(--text); cursor: pointer;
+}
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+
+.nav-links a {
+  font-family: var(--sans); font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; cursor: pointer;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+/* HERO */
+.home-hero {
+  padding: 6rem 5vw 5rem; max-width: 860px;
+}
+.home-hero h1 {
+  font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.5rem;
+}
+.home-hero h1 em { font-style: italic; color: var(--muted); }
+.home-hero p {
+  font-size: 1.05rem; font-weight: 300; color: var(--muted);
+  max-width: 52ch; line-height: 1.85;
+}
+
+.divider { border: none; border-top: 1px solid var(--border); margin: 0 5vw; }
+
+/* ABOUT */
+.about-section {
+  padding: 5rem 5vw;
+  display: grid; grid-template-columns: 180px 1fr; gap: 5rem;
+  max-width: 1100px;
+}
+.section-label {
+  font-family: var(--sans); font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint);
+  margin-bottom: 1rem;
+}
+.about-section h2 {
+  font-family: var(--serif); font-size: 1.4rem; font-weight: 400;
+  line-height: 1.3; margin-bottom: 1.2rem;
+}
+.about-section p {
+  font-size: 0.97rem; font-weight: 300; color: var(--muted);
+  line-height: 1.85; margin-bottom: 0.9rem;
+}
+
+/* TOPICS */
+.topics-section {
+  padding: 5rem 5vw;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.topics-section > .section-label { margin-bottom: 2.5rem; }
+
+.topics-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border);
+}
+
+.topic-tile {
+  background: var(--bg2); padding: 2.5rem 2rem;
+  cursor: pointer; transition: background 0.2s;
+  border: none; text-align: left; width: 100%;
+}
+.topic-tile:hover { background: var(--bg); }
+
+.tile-accent { width: 28px; height: 3px; border-radius: 2px; margin-bottom: 1.5rem; }
+
+.topic-tile h3 {
+  font-family: var(--serif); font-size: 1.2rem; font-weight: 400;
+  line-height: 1.2; margin-bottom: 0.7rem;
+}
+.topic-tile p {
+  font-size: 0.85rem; font-weight: 300; color: var(--muted); line-height: 1.65;
+}
+.tile-cta {
+  display: inline-block; margin-top: 1.5rem;
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--faint); transition: color 0.2s;
+}
+.topic-tile:hover .tile-cta { color: var(--text); }
+
+/* POSTS */
+.posts-section { padding: 5rem 5vw; max-width: 1100px; }
+.posts-section > .section-label { margin-bottom: 2.5rem; }
+
+.post-row {
+  display: grid; grid-template-columns: 140px 1fr 90px;
+  gap: 2.5rem; align-items: start;
+  padding: 2rem 0; border-bottom: 1px solid var(--border);
+  cursor: pointer; text-decoration: none; color: inherit;
+}
+.post-row:first-of-type { border-top: 1px solid var(--border); }
+.post-row:hover .post-row-title { color: var(--muted); }
+
+.post-row-meta { font-size: 0.78rem; font-weight: 300; color: var(--faint); padding-top: 3px; }
+
+.post-tag {
+  display: inline-block; font-size: 0.67rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 2px; margin-bottom: 0.6rem;
+}
+.tag-ir    { background: #e8eef5; color: var(--accent-ir); }
+.tag-fit   { background: #f5ebe8; color: var(--accent-fit); }
+.tag-med   { background: #e8f0ec; color: var(--accent-med); }
+.tag-wood  { background: #f2ece3; color: var(--accent-wood); }
+
+.post-row-title {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
+  line-height: 1.35; margin-bottom: 0.4rem; transition: color 0.2s;
+}
+.post-row-excerpt { font-size: 0.875rem; font-weight: 300; color: var(--muted); line-height: 1.7; }
+.post-row-cta {
+  font-size: 0.73rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--faint); text-align: right;
+  padding-top: 4px; transition: color 0.2s;
+}
+.post-row:hover .post-row-cta { color: var(--text); }
+
+/* RECOMMENDATIONS */
+.recs-section {
+  padding: 5rem 5vw;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+}
+.recs-section > .section-label { margin-bottom: 2rem; }
+
+.recs-tabs {
+  display: flex; border-bottom: 1px solid var(--border); margin-bottom: 3rem;
+}
+.rec-tab {
+  font-family: var(--sans); font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.65rem 1.4rem; border: none; background: none;
+  color: var(--faint); cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color 0.2s;
+}
+.rec-tab.active { color: var(--text); border-bottom-color: var(--text); }
+.rec-tab:hover { color: var(--text); }
+
+.rec-panel { display: none; }
+.rec-panel.active { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+.rec-card {
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 1.75rem; border-radius: 2px;
+}
+.rec-topic {
+  font-size: 0.67rem; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--faint); margin-bottom: 0.7rem;
+}
+.rec-card h4 {
+  font-family: var(--serif); font-size: 1rem; font-weight: 400;
+  line-height: 1.35; margin-bottom: 0.35rem;
+}
+.rec-card .rec-author {
+  font-size: 0.82rem; font-weight: 300; color: var(--muted);
+  font-style: italic; margin-bottom: 0.75rem;
+}
+.rec-card p { font-size: 0.83rem; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+/* TOPIC PAGES */
+.topic-page-header {
+  padding: 5rem 5vw 4rem; border-bottom: 1px solid var(--border); max-width: 860px;
+}
+.back-btn {
+  font-family: var(--sans); font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--faint); cursor: pointer; border: none; background: none;
+  padding: 0; margin-bottom: 2.5rem; display: inline-block;
+  transition: color 0.2s;
+}
+.back-btn:hover { color: var(--text); }
+
+.tp-accent { width: 32px; height: 3px; border-radius: 2px; margin-bottom: 1.5rem; }
+
+.topic-page-header h1 {
+  font-family: var(--serif); font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 400; line-height: 1.15; margin-bottom: 1rem;
+}
+.topic-page-header p {
+  font-size: 1rem; font-weight: 300; color: var(--muted);
+  max-width: 50ch; line-height: 1.85;
+}
+
+.topic-posts { padding: 4rem 5vw; max-width: 860px; }
+
+.tp-post {
+  padding: 2.2rem 0; border-bottom: 1px solid var(--border); cursor: default;
+}
+.tp-post:first-child { border-top: 1px solid var(--border); }
+
+.tp-post-date { font-size: 0.78rem; font-weight: 300; color: var(--faint); margin-bottom: 0.5rem; }
+.tp-post-title {
+  font-family: var(--serif); font-size: 1.35rem; font-weight: 400;
+  line-height: 1.3; margin-bottom: 0.5rem;
+}
+.tp-post-excerpt { font-size: 0.9rem; font-weight: 300; color: var(--muted); line-height: 1.75; max-width: 60ch; }
+
+/* FOOTER */
+footer {
+  padding: 2.5rem 5vw;
+  border-top: 1px solid var(--border);
+  background: var(--bg2);
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer p { font-size: 0.8rem; font-weight: 300; color: var(--faint); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .about-section { grid-template-columns: 1fr; gap: 2rem; }
+  .topics-grid { grid-template-columns: repeat(2, 1fr); }
+  .rec-panel.active { grid-template-columns: 1fr; }
+  .post-row { grid-template-columns: 1fr; gap: 0.4rem; }
+  .post-row-meta { padding-top: 0; }
+  .post-row-cta { display: none; }
+}
+@media (max-width: 600px) {
+  nav { padding: 0 1.2rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 0.7rem; }
+  .topics-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo" onclick="showPage('home')">My Blog</span>
+  <ul class="nav-links">
+    <li><a id="nav-home" class="active" onclick="showPage('home')">Home</a></li>
+    <li><a id="nav-ir" onclick="showPage('ir')">Int'l Relations</a></li>
+    <li><a id="nav-fitness" onclick="showPage('fitness')">Fitness</a></li>
+    <li><a id="nav-meditation" onclick="showPage('meditation')">Meditation</a></li>
+    <li><a id="nav-woodcarving" onclick="showPage('woodcarving')">Wood Carving</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HOME ═══ -->
+<div class="page active" id="page-home">
+
+  <div class="home-hero">
+    <h1>Writing about the things<br>that <em>actually matter to me.</em></h1>
+    <p>A personal blog covering international relations, fitness, meditation, and wood carving — four pursuits that have more in common than you might expect.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="about-section">
+    <div><p class="section-label">About</p></div>
+    <div>
+      <h2>A few words about who writes here.</h2>
+      <p>I follow geopolitics the way some people follow sport — obsessively, with opinions, and occasional heartbreak. I also train regularly, sit in meditation most mornings, and spend my weekends with a knife and a block of wood.</p>
+      <p>This blog is where those four worlds get equal time. I write to think things through, not to perform expertise. You'll find analysis alongside training logs, carving notes next to essays on statecraft.</p>
+      <p>Glad you're here.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="topics-section">
+    <p class="section-label">Four Topics</p>
+    <div class="topics-grid">
+      <button class="topic-tile" onclick="showPage('ir')">
+        <div class="tile-accent" style="background:var(--accent-ir)"></div>
+        <h3>International Relations</h3>
+        <p>Geopolitics, diplomacy, conflict, and the architecture of power.</p>
+        <span class="tile-cta">Read more →</span>
+      </button>
+      <button class="topic-tile" onclick="showPage('fitness')">
+        <div class="tile-accent" style="background:var(--accent-fit)"></div>
+        <h3>Fitness</h3>
+        <p>Training philosophy, programming, and what lifting teaches you about everything else.</p>
+        <span class="tile-cta">Read more →</span>
+      </button>
+      <button class="topic-tile" onclick="showPage('meditation')">
+        <div class="tile-accent" style="background:var(--accent-med)"></div>
+        <h3>Meditation</h3>
+        <p>Sitting practice, contemplative notes, and the discipline of stillness.</p>
+        <span class="tile-cta">Read more →</span>
+      </button>
+      <button class="topic-tile" onclick="showPage('woodcarving')">
+        <div class="tile-accent" style="background:var(--accent-wood)"></div>
+        <h3>Wood Carving</h3>
+        <p>Projects, tools, techniques, and the slow satisfaction of making things by hand.</p>
+        <span class="tile-cta">Read more →</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="posts-section">
+    <p class="section-label">Recent Posts</p>
+
+    <div class="post-row" onclick="showPage('ir')">
+      <div class="post-row-meta">April 12, 2025</div>
+      <div>
+        <span class="post-tag tag-ir">Int'l Relations</span>
+        <div class="post-row-title">The New Non-Alignment: How the Global South Is Rewriting the Rules</div>
+        <div class="post-row-excerpt">A new multipolar assertiveness is reshaping who gets to stay neutral — and what that neutrality actually costs.</div>
+      </div>
+      <div class="post-row-cta">Read →</div>
+    </div>
+
+    <div class="post-row" onclick="showPage('woodcarving')">
+      <div class="post-row-meta">April 5, 2025</div>
+      <div>
+        <span class="post-tag tag-wood">Wood Carving</span>
+        <div class="post-row-title">Six Weeks with a Spoon: Notes on Patience</div>
+        <div class="post-row-excerpt">A basswood spoon teaches you more about negative space than any design book.</div>
+      </div>
+      <div class="post-row-cta">Read →</div>
+    </div>
+
+    <div class="post-row" onclick="showPage('fitness')">
+      <div class="post-row-meta">March 28, 2025</div>
+      <div>
+        <span class="post-tag tag-fit">Fitness</span>
+        <div class="post-row-title">On Training Through Chaos: A Simple Block Approach</div>
+        <div class="post-row-excerpt">When life doesn't cooperate with a 12-week program, here's the minimalist framework I return to every time.</div>
+      </div>
+      <div class="post-row-cta">Read →</div>
+    </div>
+
+    <div class="post-row" onclick="showPage('meditation')">
+      <div class="post-row-meta">March 19, 2025</div>
+      <div>
+        <span class="post-tag tag-med">Meditation</span>
+        <div class="post-row-title">The Myth of the Empty Mind</div>
+        <div class="post-row-excerpt">Nobody tells beginners that the goal was never silence. Three years in, here's what I actually practice.</div>
+      </div>
+      <div class="post-row-cta">Read →</div>
+    </div>
+
+    <div class="post-row" onclick="showPage('ir')">
+      <div class="post-row-meta">March 8, 2025</div>
+      <div>
+        <span class="post-tag tag-ir">Int'l Relations</span>
+        <div class="post-row-title">Sanctions as Language: What We're Really Saying</div>
+        <div class="post-row-excerpt">Economic coercion tells us more about the sender than the target.</div>
+      </div>
+      <div class="post-row-cta">Read →</div>
+    </div>
+  </div>
+
+  <div class="recs-section">
+    <p class="section-label">Recommendations</p>
+    <div class="recs-tabs">
+      <button class="rec-tab active" onclick="switchTab(this,'books')">Books</button>
+      <button class="rec-tab" onclick="switchTab(this,'articles')">Articles &amp; Essays</button>
+    </div>
+
+    <div class="rec-panel active" id="panel-books">
+      <div class="rec-card">
+        <div class="rec-topic">International Relations</div>
+        <h4>The Clash of Civilizations and the Remaking of World Order</h4>
+        <div class="rec-author">Samuel P. Huntington</div>
+        <p>Still worth arguing with. Flawed but generative — it forces you to think harder about cultural fault lines in global politics.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-topic">Fitness</div>
+        <h4>Practical Programming for Strength Training</h4>
+        <div class="rec-author">Mark Rippetoe &amp; Andy Baker</div>
+        <p>Clear-eyed about how adaptation works over time. The best resource I've found for understanding why programming decisions actually matter.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-topic">Meditation</div>
+        <h4>The Mind Illuminated</h4>
+        <div class="rec-author">Culadasa (John Yates)</div>
+        <p>A rigorous map of meditative development that finally gave my practice a coherent framework. Dense but worth every page.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-topic">Wood Carving</div>
+        <h4>The Woodwright's Shop</h4>
+        <div class="rec-author">Roy Underhill</div>
+        <p>Underhill's philosophy of hand-tool work changed how I think about making things. Warm, precise, and deeply practical.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-topic">International Relations</div>
+        <h4>Prisoners of Geography</h4>
+        <div class="rec-author">Tim Marshall</div>
+        <p>A refreshingly physical account of world affairs — how mountains, rivers, and coastlines shape the decisions of states.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-topic">Meditation</div>
+        <h4>Waking Up</h4>
+        <div class="rec-author">Sam Harris</div>
+        <p>A secular approach to contemplative practice. Best suited to those who find traditional frameworks a barrier to starting.</p>
+      </div>
+    </div>
+
+    <div class="rec-panel" id="panel-articles">
+      <div class="rec-card">
+        <div class="rec-topic">International Relations</div>
+        <h4>The Tragedy of Great Power Politics: A Primer</h4>
+        <div class="rec-author">John Mearsheimer — Foreign Affairs</div>
+        <p>A concise statement of offensive realism. Whether you agree or not, this framework clarifies your thinking about state behaviour.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-topic">Fitness</div>
+        <h4>The Case for Training for Longevity, Not Performance</h4>
+        <div class="rec-author">Peter Attia — outlive.com</div>
+        <p>Reframed how I think about the purpose of training. The "Centenarian Decathlon" framing is now part of how I programme my own work.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-topic">Meditation</div>
+        <h4>Mastering the Core Teachings of the Buddha</h4>
+        <div class="rec-author">Daniel Ingram — free PDF</div>
+        <p>Controversial and unflinching. Ingram insists on treating meditation as a skill with measurable outcomes. Even skeptics benefit from the challenge.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-topic">Wood Carving</div>
+        <h4>Why Carve? The Case for Making Useless Things Well</h4>
+        <div class="rec-author">Barn the Spoon — barnthespoon.com</div>
+        <p>A philosophical defence of craft that resonated with me deeply. Short, honest, and surprisingly moving.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-topic">International Relations</div>
+        <h4>This Is Not a Crisis, It's a Transition</h4>
+        <div class="rec-author">Adam Tooze — Chartbook</div>
+        <p>Tooze's newsletter consistently offers the most rigorous structural analysis of global economic politics available in essay form.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-topic">Fitness</div>
+        <h4>The Specificity Trap: Why Training Hard Isn't Enough</h4>
+        <div class="rec-author">Chris Beardsley — medium.com</div>
+        <p>One of the clearest explanations of how specificity and variation interact in strength programming.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>My Personal Blog</p>
+    <p>Written honestly. Updated when there's something worth saying.</p>
+  </footer>
+</div>
+
+<!-- ═══ INT'L RELATIONS ═══ -->
+<div class="page" id="page-ir">
+  <div class="topic-page-header">
+    <button class="back-btn" onclick="showPage('home')">← Back to home</button>
+    <div class="tp-accent" style="background:var(--accent-ir)"></div>
+    <h1>International Relations</h1>
+    <p>Geopolitics, diplomacy, and the slow machinery of power. I write about how states behave, why conflicts happen, and what the headlines usually miss.</p>
+  </div>
+  <div class="topic-posts">
+    <div class="tp-post">
+      <div class="tp-post-date">April 12, 2025</div>
+      <div class="tp-post-title">The New Non-Alignment: How the Global South Is Rewriting the Rules</div>
+      <div class="tp-post-excerpt">After decades of Cold War binaries, a new multipolar assertiveness is reshaping who gets to stay neutral — and what that neutrality actually costs. Countries from Brazil to India are leveraging ambiguity as strategic currency in ways that would have been unthinkable 30 years ago.</div>
+    </div>
+    <div class="tp-post">
+      <div class="tp-post-date">March 8, 2025</div>
+      <div class="tp-post-title">Sanctions as Language: What We're Really Saying</div>
+      <div class="tp-post-excerpt">Economic coercion tells us more about the sender than the target. When a coalition reaches for sanctions, it is broadcasting both resolve and limitation simultaneously — and adversaries have become expert at reading the signal beneath the noise.</div>
+    </div>
+    <div class="tp-post">
+      <div class="tp-post-date">February 20, 2025</div>
+      <div class="tp-post-title">What Offshore Balancing Actually Requires</div>
+      <div class="tp-post-excerpt">The theory is elegant. The execution is not. A look at what it would genuinely take for a major power to adopt a posture of offshore balancing — and why domestic politics almost always get in the way.</div>
+    </div>
+    <div class="tp-post">
+      <div class="tp-post-date">January 31, 2025</div>
+      <div class="tp-post-title">The Geography of Escalation: Why Terrain Still Matters</div>
+      <div class="tp-post-excerpt">Drones and satellites haven't eliminated the strategic significance of physical geography. A close reading of how topography shapes modern conflict thresholds.</div>
+    </div>
+  </div>
+  <footer>
+    <p>My Personal Blog</p>
+    <p><span style="cursor:pointer;color:var(--faint)" onclick="showPage('home')">← Return home</span></p>
+  </footer>
+</div>
+
+<!-- ═══ FITNESS ═══ -->
+<div class="page" id="page-fitness">
+  <div class="topic-page-header">
+    <button class="back-btn" onclick="showPage('home')">← Back to home</button>
+    <div class="tp-accent" style="background:var(--accent-fit)"></div>
+    <h1>Fitness</h1>
+    <p>Training logs, programming philosophy, and the honest accounting of what actually works over the long run. I've been lifting seriously for several years and still find it endlessly interesting.</p>
+  </div>
+  <div class="topic-posts">
+    <div class="tp-post">
+      <div class="tp-post-date">March 28, 2025</div>
+      <div class="tp-post-title">On Training Through Chaos: A Simple Block Approach</div>
+      <div class="tp-post-excerpt">When life doesn't cooperate with a 12-week program, here's the minimalist framework I return to every time. Three movements, two sessions per week, and the discipline to not make it more complicated than it needs to be.</div>
+    </div>
+    <div class="tp-post">
+      <div class="tp-post-date">February 14, 2025</div>
+      <div class="tp-post-title">What I've Learned from Two Years of Tracking Everything</div>
+      <div class="tp-post-excerpt">Two years of detailed logs, and the most important lessons had nothing to do with sets and reps. Sleep quality, life stress, and nutritional consistency explained more variance than any training variable I measured.</div>
+    </div>
+    <div class="tp-post">
+      <div class="tp-post-date">January 18, 2025</div>
+      <div class="tp-post-title">In Defence of Boring Programming</div>
+      <div class="tp-post-excerpt">The fitness content ecosystem is built on novelty. The actual physiological literature is built on consistency and progressive overload. These two facts are almost never discussed together honestly.</div>
+    </div>
+  </div>
+  <footer>
+    <p>My Personal Blog</p>
+    <p><span style="cursor:pointer;color:var(--faint)" onclick="showPage('home')">← Return home</span></p>
+  </footer>
+</div>
+
+<!-- ═══ MEDITATION ═══ -->
+<div class="page" id="page-meditation">
+  <div class="topic-page-header">
+    <button class="back-btn" onclick="showPage('home')">← Back to home</button>
+    <div class="tp-accent" style="background:var(--accent-med)"></div>
+    <h1>Meditation</h1>
+    <p>Notes from a sitting practice that has gone through several stages — enthusiasm, doubt, plateau, and something closer to genuine integration. I write about what I've actually experienced, not the idealised version.</p>
+  </div>
+  <div class="topic-posts">
+    <div class="tp-post">
+      <div class="tp-post-date">March 19, 2025</div>
+      <div class="tp-post-title">The Myth of the Empty Mind</div>
+      <div class="tp-post-excerpt">Nobody tells beginners that the goal was never silence. Three years in, here's what I actually practice — and why the common framing of meditation as "quieting thoughts" is actively counterproductive for most people.</div>
+    </div>
+    <div class="tp-post">
+      <div class="tp-post-date">February 3, 2025</div>
+      <div class="tp-post-title">On Consistency Without Motivation</div>
+      <div class="tp-post-excerpt">Most mornings I don't want to sit. I sit anyway. Here's the reasoning behind that — and why I think motivation is entirely the wrong frame for a daily practice.</div>
+    </div>
+    <div class="tp-post">
+      <div class="tp-post-date">January 9, 2025</div>
+      <div class="tp-post-title">What Meditation Has (and Hasn't) Done for Me</div>
+      <div class="tp-post-excerpt">An honest inventory after three years. The benefits are real but different from what I expected. The limitations are also real, and worth naming directly.</div>
+    </div>
+  </div>
+  <footer>
+    <p>My Personal Blog</p>
+    <p><span style="cursor:pointer;color:var(--faint)" onclick="showPage('home')">← Return home</span></p>
+  </footer>
+</div>
+
+<!-- ═══ WOOD CARVING ═══ -->
+<div class="page" id="page-woodcarving">
+  <div class="topic-page-header">
+    <button class="back-btn" onclick="showPage('home')">← Back to home</button>
+    <div class="tp-accent" style="background:var(--accent-wood)"></div>
+    <h1>Wood Carving</h1>
+    <p>Projects, tools, and the philosophy of working with your hands. I carve mostly spoons and small figures. The pace is slow by design.</p>
+  </div>
+  <div class="topic-posts">
+    <div class="tp-post">
+      <div class="tp-post-date">April 5, 2025</div>
+      <div class="tp-post-title">Six Weeks with a Spoon: Notes on Patience</div>
+      <div class="tp-post-excerpt">A basswood spoon teaches you more about negative space than any design book. Here's what the grain told me this month — and why I deliberately didn't rush the final surface work even though it would have been fine.</div>
+    </div>
+    <div class="tp-post">
+      <div class="tp-post-date">March 2, 2025</div>
+      <div class="tp-post-title">The Three Knives I Actually Use</div>
+      <div class="tp-post-excerpt">After trying many more, I've settled on three tools that cover nearly everything: a sloyd knife, a hook knife, and a detail knife — with notes on how I choose between them for different work.</div>
+    </div>
+    <div class="tp-post">
+      <div class="tp-post-date">January 25, 2025</div>
+      <div class="tp-post-title">Why I Carve Green Wood Whenever Possible</div>
+      <div class="tp-post-excerpt">Dry wood is more predictable but green wood is more honest. Working with fresh-cut material changed my understanding of grain in a way that no dried blank ever could.</div>
+    </div>
+  </div>
+  <footer>
+    <p>My Personal Blog</p>
+    <p><span style="cursor:pointer;color:var(--faint)" onclick="showPage('home')">← Return home</span></p>
+  </footer>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const pg = document.getElementById('page-' + id);
+  if (pg) pg.classList.add('active');
+  const nav = document.getElementById('nav-' + id);
+  if (nav) nav.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function switchTab(btn, tab) {
+  document.querySelectorAll('.rec-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.rec-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = document.getElementById('panel-' + tab);
+  if (panel) panel.classList.add('active');
+}
+</script>
+</body>
+</html>
