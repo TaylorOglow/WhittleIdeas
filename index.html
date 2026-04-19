@@ -564,14 +564,14 @@ footer p { font-size: 0.8rem; color: var(--faint); }
 //  ★  CONFIG — fill these in before hosting
 // ══════════════════════════════════════════
 const STRAVA_CONFIG = {
-  CLIENT_ID: 'YOUR_CLIENT_ID',        // From strava.com/settings/api
+  CLIENT_ID: '227193',        // From strava.com/settings/api
   REDIRECT_URI: window.location.href.split('?')[0].split('#')[0],
   // Your backend proxy base URL. It must expose:
   //   POST /token  { code } → { access_token, refresh_token, expires_at, athlete }
   //   POST /token  { refresh_token } → { access_token, expires_at }
   //   GET  /activities (Authorization: Bearer <token>) → Strava activities array
   // NEVER put your CLIENT_SECRET in this file — handle it in the proxy only.
-  PROXY_BASE: 'https://your-backend.example.com/strava',
+  PROXY_BASE: 'whittle-strava-proxy-production.up.railway.app',
   SCOPE: 'read,activity:read',
 };
 
